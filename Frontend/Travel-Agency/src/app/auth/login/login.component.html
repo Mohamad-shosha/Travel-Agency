@@ -1,0 +1,54 @@
+<div class="background-canvas-wrapper">
+  <canvas id="backgroundCanvas"></canvas>
+</div>
+
+<div class="login-container">
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate class="login-form">
+
+    <h2>Welcome Back</h2>
+
+    <label for="email">Email Address</label>
+    <div class="input-group">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        email
+        #emailInput="ngModel"
+        placeholder="you@example.com" />
+      <span class="icon">📧</span>
+    </div>
+    <div *ngIf="emailInput.invalid && emailInput.touched" class="error-message">
+      ⚠️ Please enter a valid email
+    </div>
+
+    <label for="password">Password</label>
+    <div class="input-group">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        minlength="6"
+        #passwordInput="ngModel"
+        placeholder="Enter your password" />
+      <span class="icon">🔒</span>
+    </div>
+    <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-message">
+      ⚠️ Password must be at least 6 characters long
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+
+    <p style="text-align:center; margin-top: 16px;">
+      Don't have an account? <a routerLink="/register">Register here</a>
+    </p>
+
+    <div *ngIf="message" class="success-message">{{ message }}</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  </form>
+</div>

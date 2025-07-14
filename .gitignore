@@ -1,0 +1,18 @@
+# Backend
+/backend/target/
+*.class
+*.log
+
+# Frontend
+/frontend/node_modules/
+dist/
+
+# General
+*.iml
+.idea/
+*.DS_Store
+*.env
+
+# OS files
+Thumbs.db
+.DS_Store
