@@ -1,0 +1,167 @@
+.slider {
+  position: relative;
+  width: 100vw;
+  height: 85vh;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+  color: white;
+}
+
+/* كل صورة كخلفية */
+.slide {
+  position: absolute;
+  inset: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 1.3s ease-in-out;
+  filter: brightness(0.55);
+  z-index: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Overlay شفاف على الصورة لتوضيح النص */
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.2) 80%);
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+  z-index: 2;
+  border-radius: 0;
+}
+
+/* نصوص على السلايدر */
+.slide-text {
+  max-width: 600px;
+}
+
+.slide-text h2 {
+  font-size: 3.8rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  text-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+}
+
+.slide-text p {
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  line-height: 1.4;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.btn-slide {
+  background: #ff5a3c;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255, 90, 60, 0.6);
+  transition: background-color 0.3s ease;
+}
+
+.btn-slide:hover {
+  background-color: #e0482a;
+  box-shadow: 0 12px 30px rgba(224, 72, 42, 0.8);
+}
+
+/* الأزرار الجانبية */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(37, 99, 235, 0.5);
+  border: none;
+  color: white;
+  font-size: 2.2rem;
+  padding: 8px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+  user-select: none;
+  opacity: 0.7;
+}
+
+.nav:hover {
+  background: rgba(37, 99, 235, 0.9);
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+.prev {
+  left: 25px;
+}
+
+.next {
+  right: 25px;
+}
+
+/* الدوائر أسفل السلايدر */
+.dots {
+  position: absolute;
+  bottom: 35px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+.dots span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0 10px;
+  background-color: rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.dots span.active {
+  background-color: #2563eb;
+  box-shadow: 0 0 16px #2563eb;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .slide-text h2 {
+    font-size: 2.8rem;
+  }
+  .slide-text p {
+    font-size: 1.2rem;
+  }
+  .btn-slide {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .slide-text {
+    max-width: 90%;
+    padding-left: 20px;
+  }
+  .slide-text h2 {
+    font-size: 2.2rem;
+  }
+  .slide-text p {
+    font-size: 1rem;
+  }
+  .btn-slide {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.1rem;
+  }
+}

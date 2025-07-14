@@ -12,20 +12,31 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';  // مهم جدا
+import { HttpClientModule } from '@angular/common/http';
+import { LandingComponent } from './landing/landing.component';
+import { TripsComponent } from './trips/trips.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { SliderComponent } from './slider/slider.component'; 
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LandingComponent,
+    TripsComponent,
+    NavbarComponent,
+    FooterComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,  // لازم تضيفها
+    HttpClientModule, 
     MatInputModule,
     MatButtonModule,
     MatCardModule,

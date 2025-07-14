@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -23,10 +24,38 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
 
   private points: { x: number, y: number, vx: number, vy: number }[] = [];
 
+  private resizeHandler = this.resizeCanvas.bind(this);
+  private mouseMoveHandler = this.onMouseMove.bind(this);
+  private routerSubscription!: Subscription;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   ngAfterViewInit() {
+    this.initCanvasAndAnimation();
+
+    // اشترك في تغيرات الراوتر عشان لما ترجع للصفحة يعيد تشغيل الانيميشن
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(event => {
+      if (this.router.url === '/register') {
+        this.startAnimation();
+      } else {
+        this.stopAnimation();
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.stopAnimation();
+    if (this.routerSubscription) this.routerSubscription.unsubscribe();
+  }
+
+  private initCanvasAndAnimation() {
     this.canvas = document.getElementById('backgroundCanvas') as HTMLCanvasElement;
+    if (!this.canvas) {
+      setTimeout(() => this.initCanvasAndAnimation(), 100);
+      return;
+    }
     const context = this.canvas.getContext('2d');
     if (!context) {
       console.error('Failed to get 2D context from canvas');
@@ -34,18 +63,15 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
     }
     this.ctx = context;
 
-    this.resizeCanvas();
-    window.addEventListener('resize', this.resizeCanvas.bind(this));
-    window.addEventListener('mousemove', this.onMouseMove.bind(this));
+    window.removeEventListener('resize', this.resizeHandler);
+    window.removeEventListener('mousemove', this.mouseMoveHandler);
 
+    window.addEventListener('resize', this.resizeHandler);
+    window.addEventListener('mousemove', this.mouseMoveHandler);
+
+    this.resizeCanvas();
     this.initPoints(60);
     this.animate();
-  }
-
-  ngOnDestroy() {
-    window.removeEventListener('resize', this.resizeCanvas.bind(this));
-    window.removeEventListener('mousemove', this.onMouseMove.bind(this));
-    cancelAnimationFrame(this.animationId);
   }
 
   private resizeCanvas() {
@@ -73,6 +99,8 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
   }
 
   private animate = () => {
+    if (!this.ctx || !this.canvas) return;
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     for (const point of this.points) {
@@ -110,6 +138,23 @@ export class RegisterComponent implements AfterViewInit, OnDestroy {
     }
 
     this.animationId = requestAnimationFrame(this.animate);
+  }
+
+  startAnimation() {
+    // لو الانيميشن مش شغال شغله
+    if (!this.animationId) {
+      this.animate();
+    }
+  }
+
+  stopAnimation() {
+    window.removeEventListener('resize', this.resizeHandler);
+    window.removeEventListener('mousemove', this.mouseMoveHandler);
+    cancelAnimationFrame(this.animationId);
+    this.animationId = 0;
+    if (this.ctx) {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
   }
 
   onSubmit() {

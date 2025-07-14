@@ -28,12 +28,12 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/trips/**").hasAnyRole("ADMIN", "AGENT")
-                        .requestMatchers(HttpMethod.DELETE, "/api/trips/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/trips/").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/countries/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/cities/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/trips/**").hasAnyRole("ADMIN", "AGENT", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/trips/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

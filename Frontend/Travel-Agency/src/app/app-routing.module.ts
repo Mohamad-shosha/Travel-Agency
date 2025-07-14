@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import {LandingComponent} from './landing/landing.component';
+import{TripsComponent} from './trips/trips.component'
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'trips', pathMatch: 'full' },
+  { path: 'trips', component: TripsComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/register', pathMatch: 'full' }
+  { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({

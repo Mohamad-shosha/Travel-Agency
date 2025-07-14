@@ -1,0 +1,39 @@
+<div class="slider">
+  <div class="slides">
+    <div
+      class="slide"
+      *ngFor="let img of images; let i = index"
+      [class.active]="i === currentIndex"
+      [style.backgroundImage]="'url(' + img + ')'"
+    >
+      <div class="slide-overlay">
+        <div class="slide-text">
+          <h2>
+            {{[
+              'Explore the Great Pyramids',
+              'Ride the Majestic Camels',
+              'Sail the Nile River',
+              'Witness Breathtaking Sunsets',
+              'Discover Ancient Temples'
+            ][i]}}
+          </h2>
+          <p>
+            Experience Egypt like never before with our exclusive tours and adventures.
+          </p>
+          <button class="btn-slide">Book Your Trip</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="nav prev" (click)="prev()">&#10094;</button>
+  <button class="nav next" (click)="next()">&#10095;</button>
+
+  <div class="dots">
+    <span
+      *ngFor="let img of images; let i = index"
+      [class.active]="i === currentIndex"
+      (click)="goTo(i)"
+    ></span>
+  </div>
+</div>
