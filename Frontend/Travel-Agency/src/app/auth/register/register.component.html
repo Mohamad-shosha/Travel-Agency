@@ -9,7 +9,7 @@
 
     <label for="name">Full Name</label>
     <div class="input-group">
-      <input type="text" id="name" name="name" [(ngModel)]="name" required minlength="2" #nameInput="ngModel" placeholder="Your full name" />
+      <input type="text" id="name" name="name" [(ngModel)]="name" required minlength="2" #nameInput="ngModel" placeholder="Your full name" color = #000 />
       <span class="icon">👤</span>
     </div>
     <div *ngIf="nameInput.invalid && nameInput.touched" class="error-message">
@@ -36,7 +36,7 @@
 
     <button type="submit" [disabled]="registerForm.invalid">Register</button>
 
-    <p style="text-align:center; margin-top: 16px;">
+    <p style="text-align:center; margin-top: 16px; color: #ffffff;">
       Already have an account? <a routerLink="/login">Login here</a>
     </p>
 

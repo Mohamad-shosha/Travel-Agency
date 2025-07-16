@@ -1,9 +1,11 @@
 .footer {
-  background: linear-gradient(to right, #2563eb, #1e40af);
-  color: #f0f7ff;
-  padding: 40px 20px 20px;
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  color: #e0e7ff;
+  padding: 50px 20px 30px;
   font-family: 'Montserrat', sans-serif;
-  box-shadow: 0 -4px 15px rgba(37, 99, 235, 0.7);
+  box-shadow: 0 -6px 20px rgba(37, 99, 235, 0.7);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .footer-container {
@@ -11,27 +13,28 @@
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 50px;
   justify-content: space-between;
 }
 
 .footer-section {
-  flex: 1 1 250px;
-  min-width: 220px;
+  flex: 1 1 280px;
+  min-width: 260px;
 }
 
 .footer-section h3,
 .footer-section h4 {
-  margin-bottom: 20px;
-  font-weight: 700;
-  text-shadow: 0 0 8px rgba(0,0,0,0.15);
+  margin-bottom: 25px;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.05em;
 }
 
 .footer-section p,
 .footer-section li {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #f0f7ffcc;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #dbeafecc;
 }
 
 .footer-section ul {
@@ -40,31 +43,69 @@
 }
 
 .footer-section ul li {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 .footer-section ul li a {
-  color: #f0f7ffcc;
+  color: #dbeafecc;
   text-decoration: none;
   transition: color 0.3s ease;
+  font-weight: 600;
 }
 
 .footer-section ul li a:hover {
-  color: #bbd7ff;
+  color: #93c5fd;
+}
+
+.footer-section p a {
+  color: #dbeafecc;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.footer-section p a:hover {
+  color: #93c5fd;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: #dbeafecc;
+  margin-right: 20px;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.social-icons a:hover {
+  color: #93c5fd;
+  transform: scale(1.2);
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 20px;
-  font-size: 0.9rem;
-  color: #f0f7ff99;
-  border-top: 1px solid #bbd7ff55;
-  margin-top: 20px;
+  padding-top: 25px;
+  font-size: 0.95rem;
+  color: #dbeafe99;
+  border-top: 1px solid #93c5fd55;
+  margin-top: 30px;
+  letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
-    gap: 30px;
+    gap: 35px;
+    text-align: center;
+  }
+
+  .footer-section {
+    min-width: auto;
+  }
+
+  .social-icons {
+    justify-content: center;
   }
 }

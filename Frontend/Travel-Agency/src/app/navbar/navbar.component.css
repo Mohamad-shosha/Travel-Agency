@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
 .navbar {
-  background: linear-gradient(to right, #2563eb, #1e40af);
-  padding: 14px 24px;
-  color: #f0f7ff;
-  font-family: 'Montserrat', sans-serif;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.7);
+  background: linear-gradient(90deg, #3b82f6, #1e40af);
+  padding: 16px 32px;
+  color: #e0e7ff;
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1100;
+  transition: background-color 0.4s ease;
 }
 
 .nav-container {
@@ -18,32 +21,65 @@
 }
 
 .logo {
-  font-weight: 900;
-  font-size: 1.8rem;
-  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.4rem;
   color: #f0f7ff;
-  text-shadow: 0 0 6px rgba(0,0,0,0.15);
+  letter-spacing: 1.2px;
+  user-select: none;
+  cursor: default;
+  transition: color 0.3s ease;
+  text-decoration: none;
 }
+
+.logo:hover {
+  color: #bbd7ff;
+  text-decoration: none;
+}
+
+
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 36px;
   margin: 0;
   padding: 0;
 }
 
-.nav-links a {
-  color: #f0f7ffcc;
+.nav-links li a {
+  color: #dbeafecc;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-  text-shadow: 0 0 4px rgba(0,0,0,0.1);
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 0 0 0 transparent;
 }
 
-.nav-links a:hover {
-  color: #bbd7ff;
+.nav-links li a:hover,
+.nav-links li a:focus {
+  color: #3b82f6;
+  background-color: #e0e7ff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  outline: none;
   cursor: pointer;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .nav-links li a {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
 }

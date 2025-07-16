@@ -1,0 +1,21 @@
+.background-wrapper {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -3; /* أقل من الكانفاس */
+  background: linear-gradient(135deg, #e0f7ff, #b3e5fc); /* خلفية سماوية */
+}
+
+.background-canvas-wrapper {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -2; /* فوق الخلفية بس تحت المحتوى */
+  overflow: hidden;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

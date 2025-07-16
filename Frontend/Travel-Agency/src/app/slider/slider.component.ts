@@ -8,11 +8,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class SliderComponent implements OnInit, OnDestroy {
 
 images = [
-  'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1920&q=80',  // Pyramids
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80',  // Desert camel
-  'https://images.unsplash.com/photo-1526483360109-c30e8e20d5e2?auto=format&fit=crop&w=1920&q=80',  // Nile river boat
-  'https://images.unsplash.com/photo-1535914254981-b5012eebbd15?auto=format&fit=crop&w=1920&q=80',  // Egyptian sunset
-  'https://images.unsplash.com/photo-1486308510493-cb708e78a742?auto=format&fit=crop&w=1920&q=80'   // Ancient temple
+  'assets/trips/1.jpg',
+  'assets/trips/slideshow.jpg',
+  'assets/trips/3.jpg',
+  'assets/trips/5.jpg',
+  'assets/trips/4.jpg'
 ];
 
 

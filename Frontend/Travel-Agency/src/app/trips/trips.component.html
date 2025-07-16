@@ -1,18 +1,19 @@
-<div class="background-canvas-wrapper">
-  <canvas id="backgroundCanvas"></canvas>
-</div>
-
-<div class="trips-container">
-  <h2>🏜️ Explore Egyptian Treasures</h2>
-
-  <div class="trips-grid">
-    <div class="trip-card" *ngFor="let trip of trips">
-      <img [src]="trip.imageUrl" alt="Trip Image" />
-      <h3>{{ trip.title }}</h3>
-      <p>{{ trip.description }}</p>
-      <p>📍 {{ trip.cityName }}</p>
-      <p>💰 {{ trip.price }}$</p>
-      <button class="btn">Book Now</button>
+<section class="trips-section">
+  <div class="trips-container">
+    <h2>Explore Egyptian Treasures</h2>
+    <div class="trips-grid">
+      <div class="trip-card" *ngFor="let trip of trips">
+        <img [src]="trip.imageUrl" alt="Trip Image" />
+        <h3>{{ trip.title }}</h3>
+        <p>{{ trip.description }}</p>
+        <p class="trip-location">
+          <i class="fas fa-map-marker-alt"></i> {{ trip.cityName }}
+        </p>
+        <p class="trip-price">
+          <i class="fas fa-dollar-sign"></i> {{ trip.price }} USD
+        </p>
+        <button class="btn">Book Now</button>
+      </div>
     </div>
   </div>
-</div>
+</section>
