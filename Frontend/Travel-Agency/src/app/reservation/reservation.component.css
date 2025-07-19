@@ -1,0 +1,121 @@
+/* الحاوية الرئيسية في وسط الشاشة */
+.reservation-container {
+  max-width: 480px;
+  margin: 80px auto;
+  padding: 40px 35px;
+  background: #ffffff; /* أبيض نقي */
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrat', sans-serif;
+  color: #1e3a8a;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  transition: box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.reservation-container:hover {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* العنوان */
+.reservation-container h2 {
+  font-size: 2.4rem;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: 1.3px;
+  color: #2563eb;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+/* الفقرات */
+.reservation-container p {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+  color: #334155;
+  max-width: 420px;
+}
+
+/* الليبل */
+.label {
+  width: 100%;
+  text-align: left;
+  font-weight: 700;
+  color: #2563eb;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+/* الانبوت */
+input[type='number'] {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1.15rem;
+  border-radius: 14px;
+  border: 2px solid #cbd5e1;
+  background-color: #f9fafb;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  font-weight: 600;
+  color: #1e3a8a;
+  font-family: 'Montserrat', sans-serif;
+  user-select: text;
+}
+
+input[type='number']::placeholder {
+  color: #94a3b8;
+}
+
+input[type='number']:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+}
+
+/* الزر */
+button {
+  width: 100%;
+  padding: 16px 0;
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 900;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.65);
+  transition: background 0.35s ease, transform 0.3s ease;
+  user-select: none;
+}
+
+button:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+  box-shadow: none;
+  color: #e0e7ff;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1e40af, #2563eb);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.85);
+}
+
+/* رسالة الخطأ */
+.error-message {
+  margin-top: 15px;
+  font-weight: 700;
+  color: #dc2626;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  user-select: none;
+  text-shadow: 0 0 3px rgba(220, 38, 38, 0.9);
+}

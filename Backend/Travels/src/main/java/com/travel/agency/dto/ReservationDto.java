@@ -1,7 +1,8 @@
-package com.travel.agency.entities;
-import com.travel.agency.dto.TripDTO;
+package com.travel.agency.dto;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

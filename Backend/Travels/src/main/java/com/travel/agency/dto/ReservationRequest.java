@@ -1,4 +1,4 @@
-package com.travel.agency.entities;
+package com.travel.agency.dto;
 
 import lombok.Data;
 
