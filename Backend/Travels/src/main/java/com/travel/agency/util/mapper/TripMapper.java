@@ -1,7 +1,6 @@
 package com.travel.agency.util.mapper;
-import com.travel.agency.dto.CityDTO;
+
 import com.travel.agency.dto.TripDTO;
-import com.travel.agency.entities.City;
 import com.travel.agency.entities.Trip;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
