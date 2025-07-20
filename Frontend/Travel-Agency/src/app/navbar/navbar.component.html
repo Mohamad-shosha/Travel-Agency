@@ -2,9 +2,19 @@
   <div class="nav-container">
     <a routerLink="/" class="logo">Travela <span class="logo-emoji">🌍</span></a>
     <ul class="nav-links">
+
       <li><a routerLink="/trips">Trips</a></li>
-      <li><a routerLink="/register">Register</a></li>
-      <li><a routerLink="/login">Login</a></li>
+
+      <ng-container *ngIf="!isLoggedIn">
+        <li><a routerLink="/register">Register</a></li>
+        <li><a routerLink="/login">Login</a></li>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <li><span>{{ userEmail }}</span></li>
+        <li><button (click)="logout()">Logout</button></li>
+      </ng-container>
+
     </ul>
   </div>
 </nav>

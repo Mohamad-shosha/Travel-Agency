@@ -13,4 +13,6 @@ public interface UserService {
     Optional<UserDTO> getUserByEmail(String email);
 
     UserDTO saveUser(UserDTO userDTO);
+
+    public UserDTO findUserByName(String Name);
 }

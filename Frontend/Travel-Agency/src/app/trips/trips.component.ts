@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TripService } from './trip.service';
+import { TripService, Trip } from './trip.service';
+import { AuthService } from '../auth/auth.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trips',
@@ -8,14 +10,26 @@ import { TripService } from './trip.service';
 })
 export class TripsComponent implements OnInit {
 
-  trips: any[] = [];
+  trips: Trip[] = [];
 
-  constructor(private tripService: TripService) {}
+  constructor(
+    private tripService: TripService,
+    private authService: AuthService,  
+    private router: Router              
+  ) {}
 
   ngOnInit() {
     this.tripService.getAllTrips().subscribe({
       next: (data) => this.trips = data,
       error: (err) => console.error('Error loading trips:', err)
     });
+  }
+
+  onBookNow(trip: Trip) {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/reservation', trip.id]);
+    }
   }
 }

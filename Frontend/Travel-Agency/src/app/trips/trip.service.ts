@@ -1,3 +1,5 @@
+// src/app/trips/trip.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -19,11 +21,16 @@ export interface Trip {
   providedIn: 'root'
 })
 export class TripService {
-  private baseUrl = 'http://localhost:8080/api/trips'; 
+  private baseUrl = 'http://localhost:8080/api/trips';
 
   constructor(private http: HttpClient) {}
 
   getAllTrips(): Observable<Trip[]> {
     return this.http.get<Trip[]>(this.baseUrl);
   }
+
+    getTripById(id: number): Observable<Trip> {
+    return this.http.get<Trip>(`${this.baseUrl}/${id}`);
+  }
+  
 }

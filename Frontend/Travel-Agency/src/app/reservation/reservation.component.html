@@ -1,0 +1,21 @@
+<div class="reservation-container">
+  <h2>Book Trip: {{ trip.title }}</h2>
+  <!-- صورة معلقة أو محذوفة حسب طلبك -->
+  <p>{{ trip.description }}</p>
+  <p><strong>Price per person:</strong> {{ trip.price }} USD</p>
+  <p><strong>Available seats:</strong> {{ trip.availableSeats }}</p>
+
+  <label for="people" class="label">Number of people:</label>
+  <input
+    id="people"
+    type="number"
+    [(ngModel)]="numberOfPeople"
+    min="1"
+    [max]="trip.availableSeats"
+    placeholder="Enter number of people"
+  />
+
+  <button (click)="bookTrip()" [disabled]="loading">Confirm Booking</button>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>

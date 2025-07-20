@@ -1,10 +1,9 @@
 package com.travel.agency.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -23,7 +22,7 @@ public class Trip {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -37,8 +36,7 @@ public class Trip {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
-
 }
