@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +41,10 @@ public class ReservationServiceImpl implements ReservationService {
                 .build();
 
         return reservationRepository.save(reservation);
+    }
+
+    @Override
+    public List<Reservation> findByUserId(Long userId) {
+        return reservationRepository.findByUserId(userId);
     }
 }

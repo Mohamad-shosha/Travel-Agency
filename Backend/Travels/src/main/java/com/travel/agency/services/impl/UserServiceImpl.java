@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return userMapper.toUserDTO(user);
     }
+
+    public UserDTO findUserByName(String name) {
+        Optional<User> user = userRepository.findByName(name);
+        return userMapper.toUserDTO(user.get());
+    }
 }
