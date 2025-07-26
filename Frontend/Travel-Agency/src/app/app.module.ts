@@ -26,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';  // لو هتست�
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReservationComponent } from './reservation/reservation.component';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ReservationComponent } from './reservation/reservation.component';
     NavbarComponent,
     FooterComponent,
     SliderComponent,
-    ReservationComponent
+    ReservationComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,

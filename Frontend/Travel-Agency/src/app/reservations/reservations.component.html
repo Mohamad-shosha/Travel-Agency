@@ -1,0 +1,25 @@
+<div class="reservations-container">
+  <h2>My Reservations</h2>
+
+  <div *ngIf="reservations.length === 0">
+    <p>You have no reservations yet.</p>
+  </div>
+
+  <div *ngFor="let reservation of reservations" class="trip-card">
+    <h3>{{ reservation.tripDTO.title }}</h3>
+    <p><strong>Location:</strong> {{ reservation.tripDTO.cityName }}</p>
+    <p><strong>From:</strong> {{ reservation.tripDTO.startDate | date }}</p>
+    <p><strong>To:</strong> {{ reservation.tripDTO.endDate | date }}</p>
+    <p><strong>Price per person:</strong> ${{ reservation.tripDTO.price }}</p>
+    <p><strong>Number of People:</strong> {{ reservation.numberOfPeople }}</p>
+    <p><strong>Total Price:</strong> ${{ reservation.totalPrice }}</p>
+    <p 
+      [ngClass]="{
+        'pending': reservation.status === 'PENDING',
+        'confirmed': reservation.status === 'CONFIRMED',
+        'cancelled': reservation.status === 'CANCELLED'
+      }">
+      {{ reservation.status }}
+    </p>
+  </div>
+</div>
