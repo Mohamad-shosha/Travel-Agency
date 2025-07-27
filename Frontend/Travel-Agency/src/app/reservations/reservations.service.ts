@@ -6,16 +6,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ReservationService {
-  private apiUrl = 'http://localhost:8080/api/reservations/my';
+  private baseUrl = 'http://localhost:8080/api/reservations';
 
   constructor(private http: HttpClient) {}
 
-  getMyReservations(): Observable<any[]> {
-    const token = localStorage.getItem('token');  
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     });
-
-    return this.http.get<any[]>(this.apiUrl, { headers });
   }
+
+  getReservations(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/my`, {
+      headers: this.getHeaders()
+    });
+  }
+
+cancelReservation(reservationId: number): Observable<string> {
+  return this.http.put(`${this.baseUrl}/${reservationId}/cancel`, null, {
+    headers: this.getHeaders(),
+    responseType: 'text'
+  });
+}
+
+restoreReservation(reservationId: number): Observable<string> {
+  return this.http.put(`${this.baseUrl}/${reservationId}/reactivate`, null, {
+    headers: this.getHeaders(),
+    responseType: 'text'
+  });
+}
 }
