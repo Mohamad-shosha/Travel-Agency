@@ -79,15 +79,15 @@ public class ReservationServiceImpl implements ReservationService {
         reservationRepository.save(reservation);
     }
 
+
     @Override
     @Scheduled(cron = "0 0 */8 * * *")
-    public List<Reservation> findByStatus(ReservationStatus status) {
-        List<Reservation> reservations = reservationRepository.findByStatus(status);
-        for (Reservation reservation : reservations) {
+    public void confirmPendingReservations() {
+        List<Reservation> pendingReservations = reservationRepository.findByStatus(ReservationStatus.PENDING);
+        for (Reservation reservation : pendingReservations) {
             reservation.setStatus(ReservationStatus.CONFIRMED);
         }
-        reservationRepository.saveAll(reservations);
-        return reservations;
+        reservationRepository.saveAll(pendingReservations);
+        System.out.println(" Confirmed " + pendingReservations.size() + " reservations");
     }
-
 }

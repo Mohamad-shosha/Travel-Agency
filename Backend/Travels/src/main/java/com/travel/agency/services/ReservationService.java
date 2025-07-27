@@ -15,6 +15,5 @@ public interface ReservationService {
 
     void reactivateReservation(Long userId, Long reservationId);
 
-    List<Reservation> findByStatus(ReservationStatus status);
-
+    public void confirmPendingReservations();
 }
