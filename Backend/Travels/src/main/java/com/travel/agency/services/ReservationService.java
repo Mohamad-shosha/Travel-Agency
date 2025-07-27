@@ -2,6 +2,7 @@ package com.travel.agency.services;
 
 import com.travel.agency.entities.Reservation;
 import com.travel.agency.dto.ReservationRequest;
+import com.travel.agency.entities.enums.ReservationStatus;
 
 import java.util.List;
 
@@ -13,4 +14,7 @@ public interface ReservationService {
     void cancelReservation(Long userId, Long reservationId);
 
     void reactivateReservation(Long userId, Long reservationId);
+
+    List<Reservation> findByStatus(ReservationStatus status);
+
 }

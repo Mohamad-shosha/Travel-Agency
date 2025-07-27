@@ -10,6 +10,7 @@ import com.travel.agency.repositories.TripRepository;
 import com.travel.agency.repositories.UserRepository;
 import com.travel.agency.services.ReservationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -76,6 +77,17 @@ public class ReservationServiceImpl implements ReservationService {
 
         reservation.setStatus(ReservationStatus.PENDING);
         reservationRepository.save(reservation);
+    }
+
+    @Override
+    @Scheduled(cron = "0 0 */8 * * *")
+    public List<Reservation> findByStatus(ReservationStatus status) {
+        List<Reservation> reservations = reservationRepository.findByStatus(status);
+        for (Reservation reservation : reservations) {
+            reservation.setStatus(ReservationStatus.CONFIRMED);
+        }
+        reservationRepository.saveAll(reservations);
+        return reservations;
     }
 
 }
