@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripService, Trip } from '../trips/trip.service';
-import { ReservationService } from './reservation.service';  // تحتاج تنشئ هذا السيرفس
+import { ReservationService } from './reservation.service';
 import { AuthService } from '../auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reservation',
@@ -29,7 +30,7 @@ export class ReservationComponent implements OnInit {
     this.tripId = +this.route.snapshot.paramMap.get('id')!;
     this.tripService.getTripById(this.tripId).subscribe({
       next: (data) => this.trip = data,
-      error: (err) => this.errorMessage = 'Failed to load trip details'
+      error: () => this.errorMessage = 'Failed to load trip details'
     });
   }
 
@@ -43,12 +44,25 @@ export class ReservationComponent implements OnInit {
     this.reservationService.createReservation(this.tripId, this.numberOfPeople).subscribe({
       next: () => {
         this.loading = false;
-        alert('Reservation successful!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Reservation Successful',
+          text: 'Your trip reservation was completed successfully.',
+          timer: 2500,
+          showConfirmButton: false,
+          timerProgressBar: true
+        });
         this.router.navigate(['/trips']);
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = 'Failed to make reservation';
+        Swal.fire({
+          icon: 'error',
+          title: 'Reservation Failed',
+          text: 'Failed to make reservation. Please try again later.',
+          footer: err.message || '',
+          showConfirmButton: true
+        });
       }
     });
   }

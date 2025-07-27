@@ -5,6 +5,10 @@
 
       <li><a routerLink="/trips">Trips</a></li>
 
+      <li *ngIf="isLoggedIn">
+        <a routerLink="/reservations">My Reservations</a>
+      </li>
+
       <ng-container *ngIf="!isLoggedIn">
         <li><a routerLink="/register">Register</a></li>
         <li><a routerLink="/login">Login</a></li>

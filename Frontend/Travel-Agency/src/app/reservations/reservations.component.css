@@ -1,0 +1,118 @@
+.reservations-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e0e7ff, #f9fafb);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+  color: #1e293b;
+}
+
+.reservations-container h2 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #2563eb;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 3px rgba(37, 99, 235, 0.5);
+}
+
+.trip-card {
+  background-color: #ffffff;
+  border: 1.5px solid #c7d2fe;
+  padding: 25px 30px;
+  margin-bottom: 24px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+}
+
+.trip-card h3 {
+  font-size: 1.9rem;
+  color: #1e3a8a;
+  font-weight: 700;
+  margin-bottom: 15px;
+  letter-spacing: 0.8px;
+  text-transform: capitalize;
+}
+
+.trip-card p {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin: 6px 0;
+  color: #334155;
+}
+
+.trip-card strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* حالة الحجز مع ألوان مختلفة */
+.trip-card p:last-child {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.trip-card p:last-child.pending {
+  color: #f97316; /* برتقالي */
+}
+
+.trip-card p:last-child.confirmed {
+  color: #22c55e; /* أخضر */
+}
+
+.trip-card p:last-child.cancelled {
+  color: #ef4444; /* أحمر */
+}
+
+/* نص حالة الحجز بناءً على الحالة */
+.trip-card p:last-child::before {
+  content: "Status: ";
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* تنسيق رسالة عدم وجود حجوزات */
+.reservations-container div[ng-reflect-ng-if="true"] p {
+  font-size: 1.3rem;
+  color: #64748b;
+  font-style: italic;
+  text-align: center;
+  margin-top: 40px;
+}
+.action-buttons {
+  margin-top: 12px;
+}
+
+.action-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.action-buttons button:hover {
+  opacity: 0.9;
+}
+
+.action-buttons button:first-child {
+  background-color: #ef4444;
+  color: white;
+}
+
+.action-buttons button:last-child {
+  background-color: #3b82f6;
+  color: white;
+}

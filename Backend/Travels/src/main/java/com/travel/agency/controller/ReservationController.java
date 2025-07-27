@@ -59,4 +59,23 @@ public class ReservationController {
         return ResponseEntity.ok(dtoList);
     }
 
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<String> cancelReservation(@PathVariable Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((CustomUserDetails) auth.getPrincipal()).getId();
+        System.out.println("User Id : " + userId);
+        System.out.println("Trip Id : " + id);
+        reservationService.cancelReservation(userId, id);
+        return ResponseEntity.ok("Reservation cancelled successfully");
+    }
+
+    @PutMapping("/{id}/reactivate")
+    public ResponseEntity<String> reactivateReservation(@PathVariable Long id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = ((CustomUserDetails) auth.getPrincipal()).getId();
+
+        reservationService.reactivateReservation(userId, id);
+        return ResponseEntity.ok("Reservation reactivated successfully");
+    }
+
 }

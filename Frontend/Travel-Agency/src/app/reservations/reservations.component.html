@@ -1,0 +1,46 @@
+<div class="reservations-container">
+  <h2>My Reservations</h2>
+
+  <div *ngIf="reservations.length === 0">
+    <p>You have no reservations yet.</p>
+  </div>
+
+  <div *ngFor="let reservation of reservations" class="trip-card">
+    <h3>{{ reservation.tripDTO.title }}</h3>
+    
+    <p><strong>Location:</strong> {{ reservation.tripDTO.cityName }}</p>
+    <p><strong>From:</strong> {{ reservation.tripDTO.startDate | date: 'mediumDate' }}</p>
+    <p><strong>To:</strong> {{ reservation.tripDTO.endDate | date: 'mediumDate' }}</p>
+    <p><strong>Price per person:</strong> ${{ reservation.tripDTO.price }}</p>
+    <p><strong>Number of People:</strong> {{ reservation.numberOfPeople }}</p>
+    <p><strong>Total Price:</strong> ${{ reservation.totalPrice }}</p>
+    <p>
+      <strong>Status:</strong>
+      <span [ngClass]="{
+        'text-success': reservation.status === 'ACTIVE',
+        'text-warning': reservation.status === 'PENDING',
+        'text-danger': reservation.status === 'CANCELLED'
+      }">
+        {{ reservation.status }}
+      </span>
+    </p>
+
+    <div class="action-buttons mt-3">
+      <button
+        *ngIf="reservation.status === 'PENDING' || reservation.status === 'ACTIVE'"
+        (click)="cancel(reservation.id)"
+        class="btn btn-danger me-2"
+      >
+        Cancel
+      </button>
+
+      <button
+        *ngIf="reservation.status === 'CANCELLED'"
+        (click)="restore(reservation.id)"
+        class="btn btn-success"
+      >
+        Restore
+      </button>
+    </div>
+  </div>
+</div>
