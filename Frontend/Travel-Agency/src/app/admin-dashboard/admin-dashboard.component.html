@@ -1,0 +1,90 @@
+<div class="admin-dashboard container">
+  <h2 class="section-title">🧑‍💼 Manage Users</h2>
+  <div class="table-container">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
+            <select class="role-select" (change)="changeRole(user.id, $any($event.target).value)">
+              <option [selected]="user.role === 'USER'">USER</option>
+              <option [selected]="user.role === 'AGENT'">AGENT</option>
+              <option [selected]="user.role === 'ADMIN'">ADMIN</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">📋 All Reservations</h2>
+  <div class="table-container">
+    <table class="reservations-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>User Name</th>
+          <th>Trip</th>
+          <th>People</th>
+          <th>Total Price</th>
+          <th>Reservation Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let res of reservations">
+          <td>{{ res.id }}</td>
+          <td>{{ res.userId }}</td>
+          <td>{{ res.userName }}</td>
+          <td>{{ res.tripDTO?.title }}</td>
+          <td>{{ res.numberOfPeople }}</td>
+          <td>{{ res.totalPrice | currency:'USD':'symbol' }}</td>
+          <td>{{ res.reservationDate | date:'medium' }}</td>
+          <td>{{ res.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">❌ Cancelled Reservations</h2>
+  <div class="table-container">
+    <table class="reservations-table cancelled">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>User Name</th>
+          <th>Trip</th>
+          <th>People</th>
+          <th>Total Price</th>
+          <th>Reservation Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let res of cancelledReservations">
+          <td>{{ res.id }}</td>
+          <td>{{ res.userId }}</td>
+          <td>{{ res.userName }}</td>
+          <td>{{ res.tripDTO?.title }}</td>
+          <td>{{ res.numberOfPeople }}</td>
+          <td>{{ res.totalPrice | currency:'USD':'symbol' }}</td>
+          <td>{{ res.reservationDate | date:'medium' }}</td>
+          <td>{{ res.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
