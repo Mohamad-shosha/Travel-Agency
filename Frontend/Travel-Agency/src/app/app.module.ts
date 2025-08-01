@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     FooterComponent,
     SliderComponent,
     ReservationComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

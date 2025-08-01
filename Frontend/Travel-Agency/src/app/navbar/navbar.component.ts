@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   userEmail: string | null = '';
+  isAdmin = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -19,6 +20,8 @@ export class NavbarComponent implements OnInit {
     this.authService.getUserEmail().subscribe(email => {
       this.userEmail = email;
       this.isLoggedIn = this.authService.isLoggedIn();
+      const role = this.authService.getUserRole();
+      this.isAdmin = role === 'ADMIN';
     });
   }
 
