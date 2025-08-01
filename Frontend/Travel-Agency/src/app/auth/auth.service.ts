@@ -28,7 +28,31 @@ export class AuthService {
   }
 
   login(credentials: LoginData): Observable<string> {
-    return this.http.post(`${this.baseUrl}/login`, credentials, { responseType: 'text' });
+    return new Observable(observer => {
+      this.http.post(`${this.baseUrl}/login`, credentials, { responseType: 'text' })
+        .subscribe(token => {
+          this.setToken(token);
+          const decoded = this.parseJwt(token);
+          if (decoded && decoded.sub) {
+            this.setEmail(decoded.sub);
+          }
+          if (decoded && decoded.role) {
+            localStorage.setItem('role', decoded.role);
+          }
+          observer.next(token);
+          observer.complete();
+        }, err => {
+          observer.error(err);
+        });
+    });
+  }
+
+  private parseJwt(token: string): any {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      return null;
+    }
   }
 
   setToken(token: string): void {
@@ -59,6 +83,11 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('role');
     this.userEmail.next(null);
+  }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('role');
   }
 }

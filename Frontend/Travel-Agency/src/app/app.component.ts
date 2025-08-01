@@ -32,7 +32,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const url = event.urlAfterRedirects;
-        this.showSlider = !(url === '/login' || url === '/register'|| url.startsWith('/reservation'));
+        this.showSlider = !(url === '/login' || url === '/register'|| url.startsWith('/reservation')|| url.startsWith('/admin-dashboard') );
       }
     });
   }

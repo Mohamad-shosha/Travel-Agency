@@ -9,6 +9,10 @@
         <a routerLink="/reservations">My Reservations</a>
       </li>
 
+      <li *ngIf="isAdmin">
+        <a routerLink="/admin-dashboard">Admin Dashboard</a>
+      </li>
+
       <ng-container *ngIf="!isLoggedIn">
         <li><a routerLink="/register">Register</a></li>
         <li><a routerLink="/login">Login</a></li>

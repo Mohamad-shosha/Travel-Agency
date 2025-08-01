@@ -37,7 +37,7 @@ public class AuthenticationController {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user);
         return ResponseEntity.ok(token);
     }
 

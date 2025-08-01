@@ -1,5 +1,6 @@
 package com.travel.agency.services;
 
+import com.travel.agency.dto.ReservationDto;
 import com.travel.agency.entities.Reservation;
 import com.travel.agency.dto.ReservationRequest;
 import com.travel.agency.entities.enums.ReservationStatus;
@@ -16,4 +17,9 @@ public interface ReservationService {
     void reactivateReservation(Long userId, Long reservationId);
 
     public void confirmPendingReservations();
+
+    List<ReservationDto> findAll();
+
+    List<ReservationDto> getCanceledReservations();
+    
 }
