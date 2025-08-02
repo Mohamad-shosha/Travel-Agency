@@ -24,7 +24,7 @@ public class AdminInitializer implements CommandLineRunner {
     public void run(String... args) {
         if (userRepository.findByEmail("admin@travel.com").isEmpty()) {
             User admin = User.builder()
-                    .email("admin@travel.com")
+                    .email("mohamedshosha@admin.com")
                     .password(passwordEncoder.encode("admin123"))
                     .name("Admin User")
                     .role(Role.ADMIN)
@@ -33,5 +33,4 @@ public class AdminInitializer implements CommandLineRunner {
             log.info(admin.toString());
         }
     }
-
 }

@@ -35,4 +35,7 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trip_id")
     private Trip trip;
+
+    @Column(name = "cancellation_reason")
+    private String cancellationReason;
 }

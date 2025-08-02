@@ -1,16 +1,17 @@
 package com.travel.agency.controller;
 
 import com.travel.agency.config.CustomUserDetails;
+import com.travel.agency.dto.CancelReservationRequest;
 import com.travel.agency.dto.UserDTO;
 import com.travel.agency.entities.Reservation;
 import com.travel.agency.dto.ReservationDto;
 import com.travel.agency.dto.ReservationRequest;
-import com.travel.agency.entities.User;
-import com.travel.agency.repositories.UserRepository;
 import com.travel.agency.services.ReservationService;
+import com.travel.agency.services.ReservationStatusService;
 import com.travel.agency.services.UserService;
 import com.travel.agency.util.mapper.ReservationMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,8 +30,19 @@ import java.util.stream.Collectors;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final ReservationStatusService reservationStatusService;
     private final ReservationMapper reservationMapper;
     private final UserService userService;
+
+    @Autowired
+    public ReservationController(ReservationService reservationService, ReservationMapper reservationMapper,
+                                 UserService userService, ReservationStatusService reservationStatusService) {
+        this.reservationService = reservationService;
+        this.reservationMapper = reservationMapper;
+        this.userService = userService;
+        this.reservationStatusService = reservationStatusService;
+    }
+
 
     @PostMapping
     public ResponseEntity<ReservationDto> reserveTrip(@RequestBody ReservationRequest request) {
@@ -60,21 +72,23 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}/cancel")
-    public ResponseEntity<String> cancelReservation(@PathVariable Long id) {
+    public ResponseEntity<String> cancelReservation(
+            @PathVariable Long id,
+            @RequestBody CancelReservationRequest request
+    ) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Long userId = ((CustomUserDetails) auth.getPrincipal()).getId();
-        System.out.println("User Id : " + userId);
-        System.out.println("Trip Id : " + id);
-        reservationService.cancelReservation(userId, id);
+        reservationStatusService.cancelReservationWithReason(userId, id, request.getCancelReason());
         return ResponseEntity.ok("Reservation cancelled successfully");
     }
+
 
     @PutMapping("/{id}/reactivate")
     public ResponseEntity<String> reactivateReservation(@PathVariable Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Long userId = ((CustomUserDetails) auth.getPrincipal()).getId();
 
-        reservationService.reactivateReservation(userId, id);
+        reservationStatusService.reactivateReservation(userId, id);
         return ResponseEntity.ok("Reservation reactivated successfully");
     }
 

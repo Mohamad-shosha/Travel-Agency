@@ -17,4 +17,5 @@ public class ReservationDto {
     private BigDecimal totalPrice;
     private LocalDateTime reservationDate;
     private String status;
+    private String cancellationReason;
 }

@@ -48,4 +48,11 @@ export class AdminService {
       headers: this.getAuthHeaders()
     });
   }
+
+  cancelReservation(reservationId: number, reason: string): Observable<void> {
+  return this.http.put<void>(`${this.baseUrl}/reservations/cancel`, 
+    { reservationId, cancelReason: reason }, 
+    { headers: this.getAuthHeaders() });
+}
+
 }
