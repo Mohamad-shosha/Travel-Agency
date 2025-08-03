@@ -32,10 +32,11 @@
       *ngIf="reservation.status === 'PENDING'"
       class="pending-hint"
     >
-      <i class="bi bi-info-circle"></i>
-      This reservation will be automatically <strong>confirmed</strong> after 8 hours.<br />
-      You won't be able to cancel it after confirmation.
-    </div>
+<div style="white-space: normal;">
+  <i class="bi bi-info-circle"></i>
+  This reservation will be <strong>automatically confirmed</strong> after 8 hours, and you won't be able to cancel it afterwards.
+</div>
+
 
     <p *ngIf="reservation.status === 'CANCELLED' && reservation.cancellationReason">
       <strong>Cancellation Reason:</strong> {{ reservation.cancellationReason }}

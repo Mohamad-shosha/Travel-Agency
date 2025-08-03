@@ -7,9 +7,11 @@ import { TripsComponent } from './trips/trips.component';
 import { ReservationComponent } from './reservation/reservation.component'; 
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ServicesComponent } from './services/services.component';  
 
 const routes: Routes = [
   { path: '', redirectTo: 'trips', pathMatch: 'full' },
+  { path: 'services', component: ServicesComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
