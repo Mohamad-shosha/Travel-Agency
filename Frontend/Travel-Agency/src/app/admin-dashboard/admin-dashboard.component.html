@@ -1,107 +1,123 @@
-<div class="admin-dashboard container">
-  <h2 class="section-title">🧑‍💼 Manage Users</h2>
-  <div class="table-container">
-    <table class="users-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Email</th>
-          <th>Alternate Email</th>
-          <th>Phone</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.id }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.alternateEmail }}</td>
-          <td>{{ user.phoneNumber }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
-            <select class="role-select" (change)="changeRole(user.id, $any($event.target).value)">
-              <option [selected]="user.role === 'USER'">USER</option>
-              <option [selected]="user.role === 'AGENT'">AGENT</option>
-              <option [selected]="user.role === 'ADMIN'">ADMIN</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="p-6 space-y-10">
+  <!-- Manage Users -->
+  <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+    <h2 class="text-xl font-semibold text-blue-900 mb-4 flex items-center gap-2">
+      🧑‍💼 Manage Users
+    </h2>
+    <div class="overflow-auto rounded-md">
+      <table class="min-w-full text-sm text-left border border-gray-200">
+        <thead class="bg-blue-50 text-blue-800">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">Alternate Email</th>
+            <th class="px-4 py-2">Phone</th>
+            <th class="px-4 py-2">Role</th>
+            <th class="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users" class="border-t">
+            <td class="px-4 py-2">{{ user.id }}</td>
+            <td class="px-4 py-2">{{ user.email }}</td>
+            <td class="px-4 py-2">{{ user.alternateEmail }}</td>
+            <td class="px-4 py-2">{{ user.phoneNumber }}</td>
+            <td class="px-4 py-2">{{ user.role }}</td>
+            <td class="px-4 py-2 space-x-2">
+              <button (click)="deleteUser(user.id)" class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-md shadow-sm">
+                Delete
+              </button>
+              <select class="px-2 py-1 border rounded-md" (change)="changeRole(user.id, $any($event.target).value)">
+                <option [selected]="user.role === 'USER'">USER</option>
+                <option [selected]="user.role === 'AGENT'">AGENT</option>
+                <option [selected]="user.role === 'ADMIN'">ADMIN</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <h2 class="section-title">📋 All Reservations</h2>
-  <div class="table-container">
-    <table class="reservations-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>User ID</th>
-          <th>User Name</th>
-          <th>User Email</th>
-          <th>User Phone</th>
-          <th>Trip</th>
-          <th>People</th>
-          <th>Total Price</th>
-          <th>Reservation Date</th>
-          <th>Status</th>
-          <th>Cancellation Reason</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let res of reservations">
-          <td>{{ res.id }}</td>
-          <td>{{ res.userId }}</td>
-          <td>{{ res.userName }}</td>
-          <td>{{ res.userEmail }}</td>
-          <td>{{ res.userPhoneNumber }}</td>
-          <td>{{ res.tripDTO?.title }}</td>
-          <td>{{ res.numberOfPeople }}</td>
-          <td>{{ res.totalPrice | currency:'USD':'symbol' }}</td>
-          <td>{{ res.reservationDate | date:'medium' }}</td>
-          <td>{{ res.status }}</td>
-          <td>{{ res.cancellationReason }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- All Reservations -->
+  <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+    <h2 class="text-xl font-semibold text-blue-900 mb-4 flex items-center gap-2">
+      📋 All Reservations
+    </h2>
+    <div class="overflow-auto rounded-md">
+      <table class="min-w-full text-sm text-left border border-gray-200">
+        <thead class="bg-green-50 text-green-800">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">User ID</th>
+            <th class="px-4 py-2">User Name</th>
+            <th class="px-4 py-2">User Email</th>
+            <th class="px-4 py-2">User Phone</th>
+            <th class="px-4 py-2">Trip</th>
+            <th class="px-4 py-2">People</th>
+            <th class="px-4 py-2">Total Price</th>
+            <th class="px-4 py-2">Reservation Date</th>
+            <th class="px-4 py-2">Status</th>
+            <th class="px-4 py-2">Cancellation Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let res of reservations" class="border-t">
+            <td class="px-4 py-2">{{ res.id }}</td>
+            <td class="px-4 py-2">{{ res.userId }}</td>
+            <td class="px-4 py-2">{{ res.userName }}</td>
+            <td class="px-4 py-2">{{ res.userEmail }}</td>
+            <td class="px-4 py-2">{{ res.userPhoneNumber }}</td>
+            <td class="px-4 py-2">{{ res.tripDTO?.title }}</td>
+            <td class="px-4 py-2">{{ res.numberOfPeople }}</td>
+            <td class="px-4 py-2">{{ res.totalPrice | currency:'USD':'symbol' }}</td>
+            <td class="px-4 py-2">{{ res.reservationDate | date:'medium' }}</td>
+            <td class="px-4 py-2">{{ res.status }}</td>
+            <td class="px-4 py-2">{{ res.cancellationReason }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <h2 class="section-title">❌ Cancelled Reservations</h2>
-  <div class="table-container">
-    <table class="reservations-table cancelled">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>User ID</th>
-          <th>User Name</th>
-          <th>User Email</th>
-          <th>User Phone</th>
-          <th>Trip</th>
-          <th>People</th>
-          <th>Total Price</th>
-          <th>Reservation Date</th>
-          <th>Status</th>
-          <th>Cancellation Reason</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let res of cancelledReservations">
-          <td>{{ res.id }}</td>
-          <td>{{ res.userId }}</td>
-          <td>{{ res.userName }}</td>
-          <td>{{ res.userEmail }}</td>
-          <td>{{ res.userPhoneNumber }}</td>
-          <td>{{ res.tripDTO?.title }}</td>
-          <td>{{ res.numberOfPeople }}</td>
-          <td>{{ res.totalPrice | currency:'USD':'symbol' }}</td>
-          <td>{{ res.reservationDate | date:'medium' }}</td>
-          <td>{{ res.status }}</td>
-          <td>{{ res.cancellationReason }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Cancelled Reservations -->
+  <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+    <h2 class="text-xl font-semibold text-red-800 mb-4 flex items-center gap-2">
+      ❌ Cancelled Reservations
+    </h2>
+    <div class="overflow-auto rounded-md">
+      <table class="min-w-full text-sm text-left border border-gray-200">
+        <thead class="bg-red-50 text-red-800">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">User ID</th>
+            <th class="px-4 py-2">User Name</th>
+            <th class="px-4 py-2">User Email</th>
+            <th class="px-4 py-2">User Phone</th>
+            <th class="px-4 py-2">Trip</th>
+            <th class="px-4 py-2">People</th>
+            <th class="px-4 py-2">Total Price</th>
+            <th class="px-4 py-2">Reservation Date</th>
+            <th class="px-4 py-2">Status</th>
+            <th class="px-4 py-2">Cancellation Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let res of cancelledReservations" class="border-t bg-red-50/20">
+            <td class="px-4 py-2">{{ res.id }}</td>
+            <td class="px-4 py-2">{{ res.userId }}</td>
+            <td class="px-4 py-2">{{ res.userName }}</td>
+            <td class="px-4 py-2">{{ res.userEmail }}</td>
+            <td class="px-4 py-2">{{ res.userPhoneNumber }}</td>
+            <td class="px-4 py-2">{{ res.tripDTO?.title }}</td>
+            <td class="px-4 py-2">{{ res.numberOfPeople }}</td>
+            <td class="px-4 py-2">{{ res.totalPrice | currency:'USD':'symbol' }}</td>
+            <td class="px-4 py-2">{{ res.reservationDate | date:'medium' }}</td>
+            <td class="px-4 py-2">{{ res.status }}</td>
+            <td class="px-4 py-2">{{ res.cancellationReason }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-```

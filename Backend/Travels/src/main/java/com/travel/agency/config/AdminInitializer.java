@@ -25,6 +25,8 @@ public class AdminInitializer implements CommandLineRunner {
         if (userRepository.findByEmail("mohamedshosha@admin.com").isEmpty()) {
             User admin = User.builder()
                     .email("mohamedshosha@admin.com")
+                    .phoneNumber("01066147495")
+                    .alternateEmail("mohamedshosha267@admin.com")
                     .password(passwordEncoder.encode("admin123"))
                     .name("Admin User")
                     .role(Role.ADMIN)
