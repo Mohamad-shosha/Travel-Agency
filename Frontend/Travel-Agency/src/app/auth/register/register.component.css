@@ -20,10 +20,10 @@
 /* نسخت الlogin-container وبدلت اسمه register-container */
 .register-container {
   background: rgba(58, 113, 215, 0.85); /* لون أزرق سماوي واضح */
-  padding: 40px 30px;
+  padding: 60px 40px; /* نفس الحشوة زي اللي طلبتها في login-container */
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  max-width: 420px;
+  max-width: 600px; /* نفس العرض */
   width: 100%;
   z-index: 10;
   position: relative;

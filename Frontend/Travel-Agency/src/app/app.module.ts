@@ -28,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { ServicesComponent } from './services/services.component';
+import { GetInTouchComponent } from './get-in-touch/get-in-touch.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     SliderComponent,
     ReservationComponent,
     ReservationsComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    ServicesComponent,
+    GetInTouchComponent
   ],
   imports: [
     BrowserModule,

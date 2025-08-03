@@ -12,14 +12,7 @@ public interface ReservationService {
 
     List<Reservation> findByUserId(Long userId);
 
-    void cancelReservation(Long userId, Long reservationId);
-
-    void reactivateReservation(Long userId, Long reservationId);
-
-    public void confirmPendingReservations();
-
     List<ReservationDto> findAll();
 
     List<ReservationDto> getCanceledReservations();
-    
 }

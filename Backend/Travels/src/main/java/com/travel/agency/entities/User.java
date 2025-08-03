@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +22,12 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(name = "alternate_email")
+    private String alternateEmail;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     private String password;
 

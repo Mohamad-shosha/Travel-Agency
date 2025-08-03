@@ -10,6 +10,25 @@ import Swal from 'sweetalert2';
 export class ReservationsComponent implements OnInit {
   reservations: any[] = [];
 
+  selectedReservationId: number | null = null;
+  selectedReason: string = '';
+  customReason: string = '';
+
+  reasonLabels: { [key: string]: string } = {
+    PERSONAL_ISSUE: 'Personal issue',
+    ILLNESS: 'Illness',
+    WEATHER_CONDITIONS: 'Weather conditions',
+    SCHEDULE_CONFLICT: 'Change of plans',
+    TRANSPORTATION_ISSUE: 'Transportation issue',
+    FOUND_BETTER_DEAL: 'Found a better deal',
+    TRAVEL_RESTRICTIONS: 'Travel restrictions',
+    BOOKING_MISTAKE: 'Booking mistake',
+    FINANCIAL_ISSUES: 'Financial issues',
+    OTHER: 'Other'
+  };
+
+  cancellationReasons: string[] = Object.keys(this.reasonLabels); // ✅ أضفنا دي
+
   constructor(private reservationService: ReservationService) {}
 
   ngOnInit(): void {
@@ -28,7 +47,25 @@ export class ReservationsComponent implements OnInit {
   }
 
   cancel(id: number): void {
-    this.reservationService.cancelReservation(id).subscribe({
+    this.selectedReservationId = id;
+    this.selectedReason = '';
+    this.customReason = '';
+  }
+
+  confirmCancellation(): void {
+    if (!this.selectedReason) {
+      Swal.fire('Error', 'Please select a reason', 'warning');
+      return;
+    }
+
+    const reasonToSend = this.selectedReason === 'OTHER' ? this.customReason.trim() : this.selectedReason;
+
+    if (this.selectedReason === 'OTHER' && !reasonToSend) {
+      Swal.fire('Error', 'Please enter a custom reason', 'warning');
+      return;
+    }
+
+    this.reservationService.cancelReservationWithReason(this.selectedReservationId!, reasonToSend).subscribe({
       next: (message) => {
         Swal.fire({
           icon: 'success',
@@ -38,20 +75,23 @@ export class ReservationsComponent implements OnInit {
           showConfirmButton: false,
           timerProgressBar: true
         });
-        const reservation = this.reservations.find(r => r.id === id);
+        const reservation = this.reservations.find(r => r.id === this.selectedReservationId);
         if (reservation) {
           reservation.status = 'CANCELLED';
+          reservation.cancellationReason = reasonToSend;
         }
+        this.closeCancelModal();
       },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to cancel reservation',
-          footer: err.message || ''
-        });
+      error: () => {
+        Swal.fire('Error', 'Failed to cancel reservation', 'error');
       }
     });
+  }
+
+  closeCancelModal(): void {
+    this.selectedReservationId = null;
+    this.selectedReason = '';
+    this.customReason = '';
   }
 
   restore(id: number): void {
@@ -68,15 +108,11 @@ export class ReservationsComponent implements OnInit {
         const reservation = this.reservations.find(r => r.id === id);
         if (reservation) {
           reservation.status = 'PENDING';
+          reservation.cancellationReason = null;
         }
       },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to restore reservation',
-          footer: err.message || ''
-        });
+      error: () => {
+        Swal.fire('Error', 'Failed to restore reservation', 'error');
       }
     });
   }

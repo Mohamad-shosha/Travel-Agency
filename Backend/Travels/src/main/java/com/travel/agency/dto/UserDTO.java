@@ -13,6 +13,8 @@ public class UserDTO {
     private Long id;
     private String name;
     private String email;
+    private String alternateEmail;
+    private String phoneNumber;
     private Role role;
     private LocalDateTime createdAt;
 }
