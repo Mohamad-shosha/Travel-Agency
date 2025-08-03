@@ -1,6 +1,6 @@
 <div class="reservation-container">
   <h2>Book Trip: {{ trip.title }}</h2>
-  <p>{{ trip.description }}</p>
+  <p class="description">{{ trip.description }}</p>
   <p><strong>Price per person:</strong> {{ trip.price }} USD</p>
   <p><strong>Available seats:</strong> {{ trip.availableSeats }}</p>
 
@@ -12,9 +12,12 @@
     min="1"
     [max]="trip.availableSeats"
     placeholder="Enter number of people"
+    class="number-input"
   />
 
-  <button (click)="bookTrip()" [disabled]="loading">Confirm Booking</button>
+  <button (click)="bookTrip()" [disabled]="loading" class="btn-confirm">
+    {{ loading ? 'Booking...' : 'Confirm Booking' }}
+  </button>
 
   <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 </div>

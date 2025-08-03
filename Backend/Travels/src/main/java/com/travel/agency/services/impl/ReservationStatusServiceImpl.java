@@ -44,6 +44,7 @@ public class ReservationStatusServiceImpl implements ReservationStatusService {
             throw new RuntimeException("Only cancelled reservations can be reactivated");
         }
         reservation.setStatus(ReservationStatus.PENDING);
+        reservation.setCancellationReason(null);
         reservationRepository.save(reservation);
     }
 

@@ -22,7 +22,7 @@ public class AdminInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (userRepository.findByEmail("admin@travel.com").isEmpty()) {
+        if (userRepository.findByEmail("mohamedshosha@admin.com").isEmpty()) {
             User admin = User.builder()
                     .email("mohamedshosha@admin.com")
                     .password(passwordEncoder.encode("admin123"))

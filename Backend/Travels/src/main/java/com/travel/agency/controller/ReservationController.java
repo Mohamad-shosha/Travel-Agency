@@ -62,8 +62,6 @@ public class ReservationController {
         UserDTO userDTO = userDTOOpt.get();
 
         List<Reservation> reservations = reservationService.findByUserId(userDTO.getId());
-
-
         List<ReservationDto> dtoList = reservations.stream()
                 .map(reservationMapper::toDto)
                 .collect(Collectors.toList());

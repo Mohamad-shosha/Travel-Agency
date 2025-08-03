@@ -6,6 +6,8 @@
         <tr>
           <th>ID</th>
           <th>Email</th>
+          <th>Alternate Email</th>
+          <th>Phone</th>
           <th>Role</th>
           <th>Actions</th>
         </tr>
@@ -14,6 +16,8 @@
         <tr *ngFor="let user of users">
           <td>{{ user.id }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.alternateEmail }}</td>
+          <td>{{ user.phoneNumber }}</td>
           <td>{{ user.role }}</td>
           <td>
             <button (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
@@ -36,6 +40,8 @@
           <th>ID</th>
           <th>User ID</th>
           <th>User Name</th>
+          <th>User Email</th>
+          <th>User Phone</th>
           <th>Trip</th>
           <th>People</th>
           <th>Total Price</th>
@@ -49,15 +55,14 @@
           <td>{{ res.id }}</td>
           <td>{{ res.userId }}</td>
           <td>{{ res.userName }}</td>
+          <td>{{ res.userEmail }}</td>
+          <td>{{ res.userPhoneNumber }}</td>
           <td>{{ res.tripDTO?.title }}</td>
           <td>{{ res.numberOfPeople }}</td>
           <td>{{ res.totalPrice | currency:'USD':'symbol' }}</td>
           <td>{{ res.reservationDate | date:'medium' }}</td>
           <td>{{ res.status }}</td>
-          <td>{{ res.cancellationReason}}</td>
-          <td>
-            <span *ngIf="res.status === 'CANCELLED'">-</span>
-          </td>
+          <td>{{ res.cancellationReason }}</td>
         </tr>
       </tbody>
     </table>
@@ -71,6 +76,8 @@
           <th>ID</th>
           <th>User ID</th>
           <th>User Name</th>
+          <th>User Email</th>
+          <th>User Phone</th>
           <th>Trip</th>
           <th>People</th>
           <th>Total Price</th>
@@ -84,6 +91,8 @@
           <td>{{ res.id }}</td>
           <td>{{ res.userId }}</td>
           <td>{{ res.userName }}</td>
+          <td>{{ res.userEmail }}</td>
+          <td>{{ res.userPhoneNumber }}</td>
           <td>{{ res.tripDTO?.title }}</td>
           <td>{{ res.numberOfPeople }}</td>
           <td>{{ res.totalPrice | currency:'USD':'symbol' }}</td>
@@ -94,5 +103,5 @@
       </tbody>
     </table>
   </div>
-
 </div>
+```

@@ -25,15 +25,14 @@
 
 .login-container {
   background: rgba(58, 113, 215, 0.85); /* لون أزرق سماوي واضح */
-  padding: 40px 30px;
+  padding: 60px 40px; /* زيادة الحشوة */
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  max-width: 420px;
+  max-width: 600px; /* تكبير العرض */
   width: 100%;
   z-index: 10;
   position: relative;
 }
-
 
 .login-form h2 {
   text-align: center;

@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 public class ReservationDto {
     private Long id;
     private Long userId;
+    private String userEmail;
+    private String userPhoneNumber;
     private String userName;
     private TripDTO tripDTO;
     private int numberOfPeople;

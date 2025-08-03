@@ -10,6 +10,8 @@ public interface ReservationMapper {
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.name", target = "userName")
+    @Mapping(source = "user.alternateEmail" , target = "userEmail")
+    @Mapping(source = "user.phoneNumber",target = "userPhoneNumber")
     @Mapping(source = "trip", target = "tripDTO")
     @Mapping(source = "cancellationReason", target = "cancellationReason")
     ReservationDto toDto(Reservation reservation);

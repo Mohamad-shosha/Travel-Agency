@@ -1,9 +1,8 @@
-/* الحاوية الرئيسية في وسط الشاشة */
 .reservation-container {
   max-width: 480px;
   margin: 80px auto;
   padding: 40px 35px;
-  background: #ffffff; /* أبيض نقي */
+  background: #ffffff;
   border-radius: 18px;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
   font-family: 'Montserrat', sans-serif;
@@ -11,18 +10,53 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 22px;
-  transition: box-shadow 0.3s ease;
+  gap: 24px;
   user-select: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-confirm {
+  width: 100%;
+  padding: 16px 0;
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 900;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.65);
+  transition: background 0.35s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+/* الحالة المعطلة */
+.btn-confirm:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+  box-shadow: none;
+  color: #e0e7ff;
+}
+
+/* حالة التحويم */
+.btn-confirm:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1e40af, #2563eb);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.85);
+}
+
+/* تأثير الضغط (active) */
+.btn-confirm:active:not(:disabled) {
+  background: linear-gradient(135deg, #1e3aa8, #15306f);
+  box-shadow: 0 6px 20px rgba(21, 48, 111, 0.9);
+  transform: translateY(2px);
+  transition: none; /* عشان التأثير يظهر فوراً */
 }
 
 .reservation-container:hover {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
-/* العنوان */
 .reservation-container h2 {
   font-size: 2.4rem;
   font-weight: 900;
@@ -33,12 +67,21 @@
   text-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
 }
 
-/* الفقرات */
+/* وصف الرحلة */
+.reservation-container .description {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #334155;
+  margin-bottom: 0;
+}
+
+/* الفقرات العادية */
 .reservation-container p {
   font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.5;
-  margin: 0;
+  margin: 0 auto;
   color: #334155;
   max-width: 420px;
 }
@@ -54,8 +97,8 @@
   user-select: none;
 }
 
-/* الانبوت */
-input[type='number'] {
+/* حقول الإدخال */
+.number-input {
   width: 100%;
   padding: 14px 18px;
   font-size: 1.15rem;
@@ -70,18 +113,18 @@ input[type='number'] {
   user-select: text;
 }
 
-input[type='number']::placeholder {
+.number-input::placeholder {
   color: #94a3b8;
 }
 
-input[type='number']:focus {
+.number-input:focus {
   outline: none;
   border-color: #2563eb;
   box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
 }
 
-/* الزر */
-button {
+/* زر التأكيد */
+.btn-confirm {
   width: 100%;
   padding: 16px 0;
   background: linear-gradient(90deg, #2563eb, #1e40af);
@@ -96,14 +139,14 @@ button {
   user-select: none;
 }
 
-button:disabled {
+.btn-confirm:disabled {
   background: #a5b4fc;
   cursor: not-allowed;
   box-shadow: none;
   color: #e0e7ff;
 }
 
-button:hover:not(:disabled) {
+.btn-confirm:hover:not(:disabled) {
   background: linear-gradient(90deg, #1e40af, #2563eb);
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(37, 99, 235, 0.85);

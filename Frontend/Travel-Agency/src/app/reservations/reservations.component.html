@@ -7,6 +7,7 @@
 
   <div *ngFor="let reservation of reservations" class="trip-card">
     <h3>{{ reservation.tripDTO.title }}</h3>
+
     
     <p><strong>Location:</strong> {{ reservation.tripDTO.cityName }}</p>
     <p><strong>From:</strong> {{ reservation.tripDTO.startDate | date: 'mediumDate' }}</p>
@@ -14,7 +15,7 @@
     <p><strong>Price per person:</strong> ${{ reservation.tripDTO.price }}</p>
     <p><strong>Number of People:</strong> {{ reservation.numberOfPeople }}</p>
     <p><strong>Total Price:</strong> ${{ reservation.totalPrice }}</p>
-    
+
     <p>
       <strong>Status:</strong>
       <span [ngClass]="{
@@ -25,6 +26,16 @@
         {{ reservation.status }}
       </span>
     </p>
+
+    <!-- Hint for pending reservations -->
+    <div
+      *ngIf="reservation.status === 'PENDING'"
+      class="pending-hint"
+    >
+      <i class="bi bi-info-circle"></i>
+      This reservation will be automatically <strong>confirmed</strong> after 8 hours.<br />
+      You won't be able to cancel it after confirmation.
+    </div>
 
     <p *ngIf="reservation.status === 'CANCELLED' && reservation.cancellationReason">
       <strong>Cancellation Reason:</strong> {{ reservation.cancellationReason }}
@@ -50,7 +61,6 @@
   </div>
 </div>
 
-<!-- Modal for cancellation reason -->
 <div *ngIf="selectedReservationId" class="modal-overlay">
   <div class="modal-content">
     <h3>Cancel Reservation</h3>

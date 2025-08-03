@@ -1,59 +1,65 @@
 .reservations-container {
   max-width: 900px;
   margin: 50px auto;
-  padding: 30px;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #e0e7ff, #f9fafb);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+  padding: 32px 28px;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #eff6ff, #ede9fe);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(37, 99, 235, 0.12);
   color: #1e293b;
+  transition: background-color 0.3s ease;
+}
+
+.reservations-container:hover {
+  background: linear-gradient(135deg, #dbeafe, #c4b5fd);
 }
 
 .reservations-container h2 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 900;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
   text-align: center;
   color: #2563eb;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  text-shadow: 1px 1px 3px rgba(37, 99, 235, 0.5);
+  text-shadow: 1px 1px 4px rgba(37, 99, 235, 0.6);
 }
 
 .trip-card {
-  background-color: #ffffff;
+  background-color: rgba(255 255 255 / 0.9);
   border: 1.5px solid #c7d2fe;
-  padding: 25px 30px;
-  margin-bottom: 24px;
-  border-radius: 18px;
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  border-radius: 22px;
+  box-shadow: 0 14px 45px rgba(37, 99, 235, 0.18);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  cursor: default;
 }
 
 .trip-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(37, 99, 235, 0.3);
 }
 
 .trip-card h3 {
-  font-size: 1.9rem;
+  font-size: 2rem;
   color: #1e3a8a;
-  font-weight: 700;
-  margin-bottom: 15px;
-  letter-spacing: 0.8px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  letter-spacing: 1.1px;
   text-transform: capitalize;
 }
 
 .trip-card p {
   font-size: 1.15rem;
-  line-height: 1.5;
-  margin: 6px 0;
+  line-height: 1.55;
+  margin: 8px 0;
   color: #334155;
 }
 
 .trip-card strong {
   color: #1e293b;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .trip-card p:last-child {
@@ -61,16 +67,19 @@
   text-transform: uppercase;
 }
 
-.trip-card p:last-child.pending {
-  color: #f97316;
+.text-success {
+  color: #22c55e !important;
+  font-weight: 700;
 }
 
-.trip-card p:last-child.confirmed {
-  color: #22c55e;
+.text-warning {
+  color: #f59e0b !important;
+  font-weight: 700;
 }
 
-.trip-card p:last-child.cancelled {
-  color: #ef4444;
+.text-danger {
+  color: #ef4444 !important;
+  font-weight: 700;
 }
 
 .reservations-container div[ng-reflect-ng-if="true"] p {
@@ -78,156 +87,192 @@
   color: #64748b;
   font-style: italic;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 48px;
 }
 
 .action-buttons {
-  margin-top: 12px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .action-buttons button {
-  padding: 8px 14px;
+  padding: 12px 26px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-  margin-right: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  user-select: none;
 }
 
 .action-buttons button:hover {
-  opacity: 0.9;
+  opacity: 0.95;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.5);
 }
 
 .action-buttons button:first-child {
-  background-color: #ef4444;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
   color: white;
+  border: 1.5px solid transparent;
+  transition: background-color 0.3s ease;
+}
+
+.action-buttons button:first-child:hover {
+  background: linear-gradient(90deg, #1e40af, #5b21b6);
 }
 
 .action-buttons button:last-child {
-  background-color: #3b82f6;
+  background: #e0e7ff;
+  color: #1e3a8a;
+  border: 1.5px solid #7c3aed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.action-buttons button:last-child:hover {
+  background: #7c3aed;
   color: white;
 }
 
-/* Modal styles */
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.4);
+  inset: 0;
+  background: rgba(14, 30, 64, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1100;
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
-  background: white;
-  padding: 25px 30px;
-  border-radius: 12px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-}
-
-/* Modal content enhancements */
-.modal-content {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 16px;
-  width: 100%;
+  background: #f9fafb;
+  padding: 32px 36px;
+  border-radius: 24px;
   max-width: 460px;
-  font-family: 'Poppins', sans-serif;
+  width: 90%;
+  font-family: 'Montserrat', sans-serif;
   color: #1e293b;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-  animation: fadeInUp 0.3s ease-out;
+  box-shadow: 0 20px 60px rgba(14, 30, 64, 0.3);
+  animation: fadeInUp 0.3s ease forwards;
+  text-align: center;
 }
 
 .modal-content h3 {
-  font-size: 1.8rem;
-  color: #1e3a8a;
-  margin-bottom: 20px;
-  text-align: center;
-  font-weight: 700;
+  font-size: 2rem;
+  color: #2563eb;
+  margin-bottom: 24px;
+  font-weight: 900;
 }
 
-/* Label + select */
 .modal-content label {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
   display: block;
   color: #334155;
+  text-align: left;
 }
 
 .modal-content select {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1.5px solid #cbd5e1;
-  font-size: 1rem;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 2px solid #c7d2fe;
+  font-size: 1.1rem;
   outline: none;
-  background-color: #f8fafc;
+  background-color: #eef2ff;
   transition: border-color 0.3s ease;
 }
 
 .modal-content select:focus {
-  border-color: #3b82f6;
+  border-color: #7c3aed;
+  background-color: #ede9fe;
 }
 
-/* Custom reason input */
 .modal-content input[type="text"] {
   width: 100%;
-  margin-top: 10px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1.5px solid #cbd5e1;
-  font-size: 1rem;
-  background-color: #f8fafc;
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 2px solid #c7d2fe;
+  font-size: 1.1rem;
+  background-color: #eef2ff;
   outline: none;
   transition: border-color 0.3s ease;
 }
 
 .modal-content input[type="text"]:focus {
-  border-color: #3b82f6;
+  border-color: #7c3aed;
+  background-color: #ede9fe;
 }
 
-/* Modal buttons */
 .modal-content button {
-  padding: 10px 16px;
-  font-weight: 600;
-  border-radius: 8px;
+  padding: 14px 30px;
+  font-weight: 700;
+  border-radius: 16px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 12px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 24px;
+  margin-right: 16px;
+  font-size: 1.1rem;
+  user-select: none;
 }
 
 .modal-content .btn-danger {
-  background-color: #ef4444;
-  color: #fff;
+  background: linear-gradient(90deg, #ef4444, #b91c1c);
+  color: white;
+  box-shadow: 0 8px 28px rgba(239, 68, 68, 0.45);
 }
 
 .modal-content .btn-danger:hover {
-  background-color: #dc2626;
+  background: linear-gradient(90deg, #b91c1c, #7f1d1d);
 }
 
 .modal-content .btn {
-  background-color: #e2e8f0;
-  color: #1e293b;
+  background-color: #e0e7ff;
+  color: #2563eb;
+  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.3);
 }
 
 .modal-content .btn:hover {
-  background-color: #cbd5e1;
+  background-color: #c7d2fe;
+  color: #1e3a8a;
 }
 
-/* Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.pending-hint {
+  background-color: #dbeafe;
+  border-left: 5px solid #2563eb;
+  padding: 12px 18px;
+  margin-top: 18px;
+  border-radius: 14px;
+  color: #1e40af;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pending-hint i {
+  font-size: 1.3rem;
+  color: #2563eb;
 }

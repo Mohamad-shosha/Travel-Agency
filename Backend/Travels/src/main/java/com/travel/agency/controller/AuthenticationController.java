@@ -1,6 +1,7 @@
 package com.travel.agency.controller;
 
 import com.travel.agency.dto.LoginRequest;
+import com.travel.agency.dto.RegisterRequest;
 import com.travel.agency.entities.User;
 import com.travel.agency.entities.enums.Role;
 import com.travel.agency.repositories.UserRepository;
@@ -21,9 +22,16 @@ public class AuthenticationController {
     private final JwtService jwtService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        User user = User.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .alternateEmail(request.getAlternateEmail())
+                .phoneNumber(request.getPhoneNumber())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.USER)
+                .build();
+
         User savedUser = userRepository.save(user);
         return ResponseEntity.ok(savedUser);
     }
@@ -40,5 +48,4 @@ public class AuthenticationController {
         String token = jwtService.generateToken(user);
         return ResponseEntity.ok(token);
     }
-
 }

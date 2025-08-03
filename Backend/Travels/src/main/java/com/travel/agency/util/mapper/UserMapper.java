@@ -12,6 +12,8 @@ import java.util.List;
 public interface UserMapper {
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "alternateEmail",target = "alternateEmail")
+    @Mapping(source = "phoneNumber",target = "phoneNumber")
     UserDTO toUserDTO(User user);
 
     List<UserDTO> toUserDTO(List<User> users);

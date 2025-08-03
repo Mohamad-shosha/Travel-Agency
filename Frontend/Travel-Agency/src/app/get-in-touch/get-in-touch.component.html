@@ -1,0 +1,180 @@
+<section
+  id="contact"
+  class="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white"
+>
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+      <!-- معلومات الاتصال -->
+      <div>
+        <span
+          class="inline-block mb-6 bg-white/20 text-white border border-white/30 rounded-full px-4 py-1 font-semibold"
+          >Get In Touch</span
+        >
+        <h2 class="text-4xl font-bold mb-6">Ready to Start Your Adventure?</h2>
+        <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+          Let our travel experts help you plan the perfect getaway. Contact us
+          today for a personalized consultation and exclusive deals.
+        </p>
+
+        <div class="space-y-6">
+          <div class="flex items-center space-x-4">
+            <div
+              class="bg-blue-600 p-3 rounded-lg flex items-center justify-center"
+              aria-label="Call Us"
+            >
+              <!-- أيقونة هاتف -->
+              <svg
+                class="h-6 w-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.38 12.38 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.38 12.38 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold">Call Us</p>
+              <p class="text-blue-200">1-800-WANDER (1-800-926-3371)</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <div
+              class="bg-purple-600 p-3 rounded-lg flex items-center justify-center"
+              aria-label="Email Us"
+            >
+              <!-- أيقونة إيميل -->
+              <svg
+                class="h-6 w-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M4 4h16v16H4z"
+                  stroke="none"
+                  fill="none"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold">Email Us</p>
+              <p class="text-blue-200">hello@wanderlust.com</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <div
+              class="bg-green-600 p-3 rounded-lg flex items-center justify-center"
+              aria-label="Business Hours"
+            >
+              <!-- أيقونة ساعة -->
+              <svg
+                class="h-6 w-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold">Business Hours</p>
+              <p class="text-blue-200">Mon-Fri: 8AM-8PM EST</p>
+              <p class="text-blue-200">Sat-Sun: 9AM-6PM EST</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- نموذج الاتصال -->
+      <div
+        class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 text-white"
+      >
+        <h3 class="text-2xl font-semibold mb-4 text-white text-center">
+          Get Your Free Consultation
+        </h3>
+        <p class="text-blue-100 mb-8 text-center">
+          Fill out the form below and we'll get back to you within 24 hours with
+          a personalized travel proposal.
+        </p>
+
+        <form (ngSubmit)="onSubmit()" #contactForm="ngForm" novalidate>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              required
+              [(ngModel)]="contact.firstName"
+              #firstName="ngModel"
+              class="input-field bg-white/20 border border-white/30 text-white placeholder-white/70 rounded-lg p-3"
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              required
+              [(ngModel)]="contact.lastName"
+              #lastName="ngModel"
+              class="input-field bg-white/20 border border-white/30 text-white placeholder-white/70 rounded-lg p-3"
+            />
+          </div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+            email
+            [(ngModel)]="contact.email"
+            #email="ngModel"
+            class="input-field w-full bg-white/20 border border-white/30 text-white placeholder-white/70 rounded-lg p-3 mb-4"
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            [(ngModel)]="contact.phone"
+            class="input-field w-full bg-white/20 border border-white/30 text-white placeholder-white/70 rounded-lg p-3 mb-4"
+          />
+          <input
+            type="text"
+            name="destination"
+            placeholder="Preferred Destination"
+            [(ngModel)]="contact.destination"
+            class="input-field w-full bg-white/20 border border-white/30 text-white placeholder-white/70 rounded-lg p-3 mb-4"
+          />
+          <textarea
+            name="message"
+            placeholder="Tell us about your dream trip..."
+            rows="4"
+            [(ngModel)]="contact.message"
+            class="input-field w-full bg-white/20 border border-white/30 text-white placeholder-white/70 rounded-lg p-3 resize-none mb-6"
+          ></textarea>
+
+          <button
+            type="submit"
+            [disabled]="contactForm.invalid"
+            class="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold py-3 rounded-xl transition-transform transform hover:scale-105 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            Get My Free Consultation
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
