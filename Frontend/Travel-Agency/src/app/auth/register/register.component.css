@@ -8,7 +8,6 @@
   position: relative;
 }
 
-/* مفيش background هنا عشان الكانفاس اللي في app.component يظهر */
 .background-canvas-wrapper {
   display: none;
 }
@@ -17,13 +16,12 @@
   display: none;
 }
 
-/* نسخت الlogin-container وبدلت اسمه register-container */
 .register-container {
-  background: rgba(58, 113, 215, 0.85); /* لون أزرق سماوي واضح */
-  padding: 60px 40px; /* نفس الحشوة زي اللي طلبتها في login-container */
+  background: rgba(58, 113, 215, 0.85);
+  padding: 30px 25px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  max-width: 600px; /* نفس العرض */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 550px;
   width: 100%;
   z-index: 10;
   position: relative;
@@ -31,30 +29,31 @@
 
 .register-form h2 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: #ffffff;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 label {
   display: block;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   color: #ffffff;
+  font-size: 0.9rem;
 }
 
 .input-group {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .input-group input {
   width: 100%;
-  padding: 12px 40px 12px 14px;
+  padding: 10px 38px 10px 12px;
   border: 1.5px solid #cbd5e1;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: border-color 0.3s;
   box-sizing: border-box;
 }
@@ -67,27 +66,27 @@ label {
 
 .icon {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #ffffff;
   user-select: none;
 }
 
 .error-message {
   color: #dc2626;
-  font-size: 0.875rem;
-  margin-top: -14px;
-  margin-bottom: 14px;
+  font-size: 0.8rem;
+  margin-top: -12px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .success-message {
-  margin-top: 16px;
-  font-size: 1rem;
+  margin-top: 14px;
+  font-size: 0.95rem;
   color: #16a34a;
   font-weight: 600;
   text-align: center;
@@ -95,9 +94,9 @@ label {
 
 button {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: white;
   background: #2563eb;
   border: none;

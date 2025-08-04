@@ -9,7 +9,16 @@
 
     <label for="name">Full Name</label>
     <div class="input-group">
-      <input type="text" id="name" name="name" [(ngModel)]="name" required minlength="2" #nameInput="ngModel" placeholder="Your full name" color = #000 />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="name"
+        required
+        minlength="2"
+        #nameInput="ngModel"
+        placeholder="Your full name"
+        color="#000" />
       <span class="icon">👤</span>
     </div>
     <div *ngIf="nameInput.invalid && nameInput.touched" class="error-message">
@@ -18,16 +27,66 @@
 
     <label for="email">Email Address</label>
     <div class="input-group">
-      <input type="email" id="email" name="email" [(ngModel)]="email" required email #emailInput="ngModel" placeholder="you@example.com" />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        email
+        #emailInput="ngModel"
+        placeholder="you@example.com" />
       <span class="icon">📧</span>
     </div>
     <div *ngIf="emailInput.invalid && emailInput.touched" class="error-message">
       ⚠️ Please enter a valid email
     </div>
 
+    <label for="alternateEmail">Alternate Email</label>
+    <div class="input-group">
+      <input
+        type="email"
+        id="alternateEmail"
+        name="alternateEmail"
+        [(ngModel)]="alternateEmail"
+        email
+        #alternateEmailInput="ngModel"
+        placeholder="Alternate email (optional)" />
+      <span class="icon">📧</span>
+    </div>
+    <div *ngIf="alternateEmailInput.invalid && alternateEmailInput.touched" class="error-message">
+      ⚠️ Please enter a valid alternate email
+    </div>
+
+    <label for="phoneNumber">Phone Number</label>
+    <div class="input-group">
+      <input
+        type="tel"
+        id="phoneNumber"
+        name="phoneNumber"
+        [(ngModel)]="phoneNumber"
+        required
+        minlength="7"
+        maxlength="15"
+        #phoneInput="ngModel"
+        placeholder="Your phone number" />
+      <span class="icon">📞</span>
+    </div>
+    <div *ngIf="phoneInput.invalid && phoneInput.touched" class="error-message">
+      ⚠️ Please enter a valid phone number (7-15 digits)
+    </div>
+
     <label for="password">Password</label>
     <div class="input-group">
-      <input type="password" id="password" name="password" [(ngModel)]="password" required minlength="6" #passwordInput="ngModel" placeholder="Minimum 6 characters" />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        minlength="6"
+        #passwordInput="ngModel"
+        placeholder="Minimum 6 characters" />
       <span class="icon">🔒</span>
     </div>
     <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-message">

@@ -27,7 +27,7 @@ export class ReservationsComponent implements OnInit {
     OTHER: 'Other'
   };
 
-  cancellationReasons: string[] = Object.keys(this.reasonLabels); // ✅ أضفنا دي
+  cancellationReasons: string[] = Object.keys(this.reasonLabels);
 
   constructor(private reservationService: ReservationService) {}
 

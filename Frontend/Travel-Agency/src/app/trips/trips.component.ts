@@ -46,26 +46,24 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.applyScaleEffect();
     });
 
-    // Initial scale application
     this.applyScaleEffect();
   }
-  
-applyScaleEffect() {
-  const container = this.scrollContainer.nativeElement;
-  const cards = container.querySelectorAll('.trip-card');
-  const containerCenter = container.scrollLeft + container.clientWidth / 2;
 
-  cards.forEach((card) => {
-    const element = card as HTMLElement;
-    const cardCenter = element.offsetLeft + element.clientWidth / 2;
-    const distance = Math.abs(containerCenter - cardCenter);
-    const maxDistance = element.clientWidth * 1.5;
+  applyScaleEffect() {
+    const container = this.scrollContainer.nativeElement;
+    const cards = container.querySelectorAll('.trip-card');
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
 
-    let scale = 1 - Math.min(distance / maxDistance, 1) * 0.15; // من 1 إلى 0.85
-    element.style.transform = `scale(${scale})`;
-  });
-}
+    cards.forEach((card) => {
+      const element = card as HTMLElement;
+      const cardCenter = element.offsetLeft + element.clientWidth / 2;
+      const distance = Math.abs(containerCenter - cardCenter);
+      const maxDistance = element.clientWidth * 1.5;
 
+      let scale = 1 - Math.min(distance / maxDistance, 1) * 0.15;
+      element.style.transform = `scale(${scale})`;
+    });
+  }
 
   ngOnDestroy() {
     this.stopAutoScroll();
@@ -81,7 +79,7 @@ applyScaleEffect() {
 
   scrollLeft() {
     this.scrollContainer.nativeElement.scrollBy({
-      left: -840, // 3 cards * 280px
+      left: -560,
       behavior: 'smooth',
     });
     this.resetAutoScroll();
@@ -89,7 +87,7 @@ applyScaleEffect() {
 
   scrollRight() {
     this.scrollContainer.nativeElement.scrollBy({
-      left: 840, // 3 cards * 280px
+      left: 560,
       behavior: 'smooth',
     });
     this.resetAutoScroll();
@@ -101,9 +99,9 @@ applyScaleEffect() {
       if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
         container.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        container.scrollBy({ left: 280, behavior: 'smooth' }); // Scroll 1 card per step in auto
+        container.scrollBy({ left: 280, behavior: 'smooth' });
       }
-    }, 3000);
+    }, 4000);
   }
 
   stopAutoScroll() {
@@ -115,6 +113,6 @@ applyScaleEffect() {
 
   resetAutoScroll() {
     this.stopAutoScroll();
-    setTimeout(() => this.startAutoScroll(), 5000);
+    setTimeout(() => this.startAutoScroll(), 7000);
   }
 }

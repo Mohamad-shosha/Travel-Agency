@@ -24,9 +24,8 @@ export class ReservationService {
     });
   }
 
-  // ✅ التعديل هنا: السبب بقى في body بدل URL
   cancelReservationWithReason(reservationId: number, reason: string): Observable<string> {
-    const body = { cancelReason: reason }; // يطابق كلاس CancelReservationRequest في الباك
+    const body = { cancelReason: reason };
     return this.http.put(`${this.baseUrl}/${reservationId}/cancel`, body, {
       headers: this.getHeaders(),
       responseType: 'text'

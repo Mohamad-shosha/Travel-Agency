@@ -67,21 +67,33 @@ h2 {
   margin-bottom: 16px;
   box-shadow: 0 6px 20px rgba(30, 58, 138, 0.1);
 }
+.trips-section:hover .scroll-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
 
 .scroll-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(37, 99, 235, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   border: none;
-  color: white;
-  font-size: 2rem;
-  width: 44px;
-  height: 44px;
+  color: #2563eb;
+  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  z-index: 10;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,13 +101,15 @@ h2 {
 }
 
 .scroll-btn:hover {
-  background-color: rgba(30, 58, 138, 0.9);
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.6);
 }
 
 .scroll-btn.left-0 {
-  left: 8px;
+  left: 12px;
 }
 
 .scroll-btn.right-0 {
-  right: 8px;
+  right: 12px;
 }

@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
+// حدثت واجهة User لتشمل الحقول الجديدة
 interface User {
   name: string;
   email: string;
+  alternateEmail?: string;  // اختياري
+  phoneNumber: string;
   password: string;
 }
 

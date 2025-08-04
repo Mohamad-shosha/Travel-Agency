@@ -11,6 +11,8 @@ export class RegisterComponent {
 
   name = '';
   email = '';
+  alternateEmail = '';
+  phoneNumber = '';
   password = '';
   message = '';
   error = '';
@@ -18,7 +20,13 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe({
+    this.authService.register({
+      name: this.name,
+      email: this.email,
+      alternateEmail: this.alternateEmail,
+      phoneNumber: this.phoneNumber,
+      password: this.password
+    }).subscribe({
       next: () => {
         this.message = 'Registration successful! You can now log in.';
         this.error = '';

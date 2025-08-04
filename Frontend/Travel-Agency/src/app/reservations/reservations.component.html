@@ -8,7 +8,6 @@
   <div *ngFor="let reservation of reservations" class="trip-card">
     <h3>{{ reservation.tripDTO.title }}</h3>
 
-    
     <p><strong>Location:</strong> {{ reservation.tripDTO.cityName }}</p>
     <p><strong>From:</strong> {{ reservation.tripDTO.startDate | date: 'mediumDate' }}</p>
     <p><strong>To:</strong> {{ reservation.tripDTO.endDate | date: 'mediumDate' }}</p>
@@ -19,32 +18,28 @@
     <p>
       <strong>Status:</strong>
       <span [ngClass]="{
-        'text-success': reservation.status === 'ACTIVE',
-        'text-warning': reservation.status === 'PENDING',
-        'text-danger': reservation.status === 'CANCELLED'
+        'text-success': reservation.status?.toUpperCase() === 'ACTIVE',
+        'text-warning': reservation.status?.toUpperCase() === 'PENDING',
+        'text-danger': reservation.status?.toUpperCase() === 'CANCELLED'
       }">
         {{ reservation.status }}
       </span>
     </p>
 
-    <!-- Hint for pending reservations -->
-    <div
-      *ngIf="reservation.status === 'PENDING'"
-      class="pending-hint"
-    >
-<div style="white-space: normal;">
+<div *ngIf="reservation.status?.toUpperCase() === 'PENDING'" class="pending-hint">
   <i class="bi bi-info-circle"></i>
   This reservation will be <strong>automatically confirmed</strong> after 8 hours, and you won't be able to cancel it afterwards.
 </div>
 
 
-    <p *ngIf="reservation.status === 'CANCELLED' && reservation.cancellationReason">
+
+    <p *ngIf="reservation.status?.toUpperCase() === 'CANCELLED' && reservation.cancellationReason">
       <strong>Cancellation Reason:</strong> {{ reservation.cancellationReason }}
     </p>
 
     <div class="action-buttons mt-3">
       <button
-        *ngIf="reservation.status === 'PENDING' || reservation.status === 'ACTIVE'"
+        *ngIf="reservation.status?.toUpperCase() === 'PENDING' || reservation.status?.toUpperCase() === 'ACTIVE'"
         (click)="cancel(reservation.id)"
         class="btn btn-danger me-2"
       >
@@ -52,7 +47,7 @@
       </button>
 
       <button
-        *ngIf="reservation.status === 'CANCELLED'"
+        *ngIf="reservation.status?.toUpperCase() === 'CANCELLED'"
         (click)="restore(reservation.id)"
         class="btn btn-success"
       >
@@ -62,12 +57,13 @@
   </div>
 </div>
 
+<!-- If you want to keep modal for reasons, keep this block -->
 <div *ngIf="selectedReservationId" class="modal-overlay">
   <div class="modal-content">
     <h3>Cancel Reservation</h3>
 
     <label for="reason">Select Reason:</label>
-    <select name="reason" [(ngModel)]="selectedReason">
+    <select name="reason" [(ngModel)]="selectedReason" id="reason">
       <option *ngFor="let reason of cancellationReasons" [value]="reason">
         {{ reasonLabels[reason] }}
       </option>
@@ -83,7 +79,9 @@
     </div>
 
     <div style="margin-top: 15px;">
-      <button (click)="confirmCancellation()" class="btn btn-danger me-2">Confirm Cancellation</button>
+      <button (click)="confirmCancellation()" class="btn btn-danger me-2" style="color: white;">
+  Confirm Cancellation
+</button>
       <button (click)="closeCancelModal()" class="btn">Cancel</button>
     </div>
   </div>
