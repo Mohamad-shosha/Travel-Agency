@@ -1,28 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-interface ReservationRequest {
-  tripId: number;
-  numberOfPeople: number;
-}
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
-  private baseUrl = 'https://travel-agency-production.up.railway.app/api/reservations';
+  private baseUrl = environment.apiUrl + '/reservations';
 
   constructor(private http: HttpClient) {}
 
-  createReservation(tripId: number, numberOfPeople: number): Observable<any> {
+  private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     });
+  }
 
-    const body: ReservationRequest = { tripId, numberOfPeople };
-    return this.http.post(this.baseUrl, body, { headers });
+  getReservations(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/my`, {
+      headers: this.getHeaders()
+    });
+  }
+
+  createReservation(tripId: number, numberOfPeople: number): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+
+  const body = { tripId, numberOfPeople };
+  return this.http.post(`${this.baseUrl}`, body, { headers });
+}
+
+
+  cancelReservationWithReason(reservationId: number, reason: string): Observable<string> {
+    const body = { cancelReason: reason };
+    return this.http.put(`${this.baseUrl}/${reservationId}/cancel`, body, {
+      headers: this.getHeaders(),
+      responseType: 'text'
+    });
+  }
+
+  restoreReservation(reservationId: number): Observable<string> {
+    return this.http.put(`${this.baseUrl}/${reservationId}/reactivate`, null, {
+      headers: this.getHeaders(),
+      responseType: 'text'
+    });
   }
 }

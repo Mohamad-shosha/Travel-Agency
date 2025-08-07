@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-// حدثت واجهة User لتشمل الحقول الجديدة
 interface User {
   name: string;
   email: string;
-  alternateEmail?: string;  // اختياري
+  alternateEmail?: string;
   phoneNumber: string;
   password: string;
 }
@@ -20,7 +20,7 @@ interface LoginData {
   providedIn: 'root',
 })
 export class AuthService {
-    private baseUrl = 'https://travel-agency-production.up.railway.app/api/auth';
+  private baseUrl = environment.apiUrl + '/auth';
 
   private userEmail = new BehaviorSubject<string | null>(this.getEmailFromStorage());
 
