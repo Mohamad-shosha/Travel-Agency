@@ -21,7 +21,7 @@ export interface Trip {
   providedIn: 'root'
 })
 export class TripService {
-  private baseUrl = 'http://localhost:8080/api/trips';
+  private baseUrl = 'https://travel-agency-production.up.railway.app/api/trips';
 
   constructor(private http: HttpClient) {}
 
