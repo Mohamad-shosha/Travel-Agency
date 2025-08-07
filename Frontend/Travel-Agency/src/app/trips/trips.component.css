@@ -11,7 +11,10 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 100%;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
   margin: 0 auto;
   text-align: center;
   position: relative;
@@ -112,4 +115,41 @@ h2 {
 
 .scroll-btn.right-0 {
   right: 12px;
+}
+@media (max-width: 640px) {
+  .trip-card {
+    width: 90vw;
+    padding: 16px;
+  }
+
+  .trip-card img {
+    height: 150px;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+  }
+
+  .scroll-btn.left-0,
+  .scroll-btn.right-0 {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .trip-card {
+    width: 220px;
+    padding: 20px;
+  }
+
+  .trip-card img {
+    height: 160px;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
 }

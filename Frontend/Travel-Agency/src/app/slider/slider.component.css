@@ -8,7 +8,6 @@
   color: white;
 }
 
-/* كل صورة كخلفية */
 .slide {
   position: absolute;
   inset: 0;
@@ -26,7 +25,6 @@
   z-index: 1;
 }
 
-/* Overlay شفاف على الصورة لتوضيح النص */
 .slide-overlay {
   position: absolute;
   inset: 0;
@@ -36,11 +34,14 @@
   padding-left: 60px;
   z-index: 2;
   border-radius: 0;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 }
 
-/* نصوص على السلايدر */
 .slide-text {
   max-width: 600px;
+  padding: 20px;
 }
 
 .slide-text h2 {
@@ -68,6 +69,8 @@
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(255, 90, 60, 0.6);
   transition: background-color 0.3s ease;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .btn-slide:hover {
@@ -82,23 +85,22 @@
   background: rgba(37, 99, 235, 0.2);
   border: none;
   color: white;
-  font-size: 1.2rem;
-  padding: 6px 10px;
+  font-size: 1.5rem;
+  padding: 8px 12px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 5;
   box-shadow: none;
   transition: background 0.3s ease, transform 0.2s ease;
   user-select: none;
-  opacity: 0.4;
-}
-
-.nav:hover {
-  background: rgba(37, 99, 235, 0.4);
-  transform: scale(1.05);
   opacity: 0.7;
 }
 
+.nav:hover {
+  background: rgba(37, 99, 235, 0.5);
+  transform: scale(1.1);
+  opacity: 1;
+}
 
 .prev {
   left: 25px;
@@ -108,7 +110,6 @@
   right: 25px;
 }
 
-/* الدوائر أسفل السلايدر */
 .dots {
   position: absolute;
   bottom: 35px;
@@ -134,7 +135,6 @@
   box-shadow: 0 0 16px #2563eb;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .slide-text h2 {
     font-size: 2.8rem;
@@ -146,22 +146,50 @@
     padding: 12px 24px;
     font-size: 1rem;
   }
+  .nav {
+    font-size: 1.4rem;
+    padding: 7px 11px;
+  }
 }
 
 @media (max-width: 640px) {
+  .slide-overlay {
+    padding-left: 20px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    padding-bottom: 40px;
+    flex-direction: column;
+  }
+
   .slide-text {
     max-width: 90%;
-    padding-left: 20px;
+    padding: 0;
   }
+
   .slide-text h2 {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    line-height: 1.1;
   }
+
   .slide-text p {
     font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.3;
   }
+
   .btn-slide {
     width: 100%;
     padding: 14px 0;
     font-size: 1.1rem;
+    white-space: normal;
+  }
+
+  .nav {
+    font-size: 1.8rem;
+    padding: 10px 14px;
+    opacity: 0.9;
   }
 }
