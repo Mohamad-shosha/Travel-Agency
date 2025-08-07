@@ -1,6 +1,4 @@
-<section
-  class="trips-section py-20 bg-gradient-to-br from-blue-50 to-purple-50 min-h-[350px] relative"
->
+<section class="trips-section py-20 bg-gradient-to-br from-blue-50 to-purple-50 min-h-[350px] relative">
   <div class="container mx-auto px-6 max-w-7xl">
     <h2 class="text-4xl font-extrabold text-center text-blue-900 mb-12">
       Explore Egyptian Treasures
@@ -8,10 +6,9 @@
 
     <!-- Left Arrow -->
     <button
-      class="scroll-btn left-0 absolute top-1/2 -translate-y-1/2 bg-white/70 backdrop-blur rounded-full p-3 shadow-md text-blue-700 hover:text-blue-900 transition-colors"
+      class="scroll-btn left-0 absolute top-1/2 -translate-y-1/2"
       (click)="scrollLeft()"
       aria-label="Scroll Left"
-      style="z-index: 10;"
     >
       &#9664;
     </button>
@@ -19,12 +16,11 @@
     <!-- Scroll Container -->
     <div
       #scrollContainer
-      class="trips-scroll-container flex overflow-x-auto space-x-6 py-4 scrollbar-hide"
-      style="scroll-padding-left: 48px;"
+      class="trips-scroll-container flex overflow-x-auto scroll-smooth snap-x snap-mandatory space-x-4 sm:space-x-6 py-4 scrollbar-hide"
     >
       <div
         *ngFor="let trip of trips"
-        class="trip-card bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer p-6 flex-shrink-0 flex flex-col"
+        class="trip-card snap-start bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer p-6 flex-shrink-0 flex flex-col"
       >
         <img
           [src]="trip.imageUrl"
@@ -37,18 +33,12 @@
           {{ trip.description }}
         </p>
 
-        <div
-          class="flex justify-between items-center mb-5 text-blue-600 font-semibold"
-        >
-          <p
-            class="flex items-center space-x-2 hover:text-blue-800 transition-colors"
-          >
+        <div class="flex justify-between items-center mb-5 text-blue-600 font-semibold">
+          <p class="flex items-center space-x-2 hover:text-blue-800 transition-colors">
             <i class="fas fa-map-marker-alt text-xl"></i>
             <span>{{ trip.cityName }}</span>
           </p>
-          <p
-            class="flex items-center space-x-2 hover:text-blue-800 transition-colors"
-          >
+          <p class="flex items-center space-x-2 hover:text-blue-800 transition-colors">
             <i class="fas fa-dollar-sign text-xl"></i>
             <span>${{ trip.price.toLocaleString() }} USD</span>
           </p>
@@ -65,10 +55,9 @@
 
     <!-- Right Arrow -->
     <button
-      class="scroll-btn right-0 absolute top-1/2 -translate-y-1/2 bg-white/70 backdrop-blur rounded-full p-3 shadow-md text-blue-700 hover:text-blue-900 transition-colors"
+      class="scroll-btn right-0 absolute top-1/2 -translate-y-1/2"
       (click)="scrollRight()"
       aria-label="Scroll Right"
-      style="z-index: 10;"
     >
       &#9654;
     </button>

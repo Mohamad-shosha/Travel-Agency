@@ -153,3 +153,9 @@ h2 {
     font-size: 2.4rem;
   }
 }
+@media (max-width: 639px) {
+  .trip-card {
+    width: 32vw;
+    min-width: 32vw;
+  }
+}
