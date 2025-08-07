@@ -20,7 +20,7 @@ interface LoginData {
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
+    private baseUrl = 'https://travel-agency-production.up.railway.app/api/auth';
 
   private userEmail = new BehaviorSubject<string | null>(this.getEmailFromStorage());
 
