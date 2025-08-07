@@ -162,3 +162,44 @@
   user-select: none;
   text-shadow: 0 0 3px rgba(220, 38, 38, 0.9);
 }
+
+@media (max-width: 480px) {
+  .reservation-container {
+    margin: 30px 15px;
+    padding: 20px 15px;
+    max-width: 320px; 
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .reservation-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .reservation-container p,
+  .reservation-container .description {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .label {
+    font-size: 0.95rem;
+  }
+
+  .number-input {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .btn-confirm {
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5);
+  }
+
+  .error-message {
+    font-size: 0.95rem;
+  }
+}
