@@ -8,10 +8,12 @@
       class="w-full flex-shrink-0 relative bg-center bg-cover h-full"
       [style.backgroundImage]="'url(' + img + ')'"
     >
-      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent z-10"></div>
+      <!-- تدرج أسود فوق الخلفية -->
+      <div class="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
+
 
       <div class="slide-overlay">
-        <div class="slide-text">
+        <div class="slide-text text-white drop-shadow-lg">
           <h2>
             {{
               [

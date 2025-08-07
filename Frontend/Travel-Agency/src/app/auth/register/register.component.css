@@ -17,7 +17,7 @@
 }
 
 .register-container {
-  background: rgba(58, 113, 215, 0.85);
+  background: linear-gradient(to right, rgba(59, 130, 246, 0.85), rgba(139, 92, 246, 0.85));
   padding: 30px 25px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -26,6 +26,7 @@
   z-index: 10;
   position: relative;
 }
+
 
 .register-form h2 {
   text-align: center;
@@ -112,4 +113,47 @@ button:hover:not(:disabled) {
 button:disabled {
   background: #99bdf8;
   cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .register-container {
+    width: 90vw;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .register-form h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  label {
+    font-size: 0.85rem;
+  }
+
+  .input-group input {
+    font-size: 0.85rem;
+    padding: 8px 35px 8px 10px;
+  }
+
+  .icon {
+    font-size: 1rem;
+    right: 8px;
+  }
+
+  .error-message {
+    font-size: 0.75rem;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+
+  .success-message {
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
 }

@@ -24,15 +24,16 @@
 }
 
 .login-container {
-  background: rgba(58, 113, 215, 0.85); /* لون أزرق سماوي واضح */
-  padding: 60px 40px; /* زيادة الحشوة */
+  background: linear-gradient(to right, rgba(59, 130, 246, 0.85), rgba(139, 92, 246, 0.85));
+  padding: 60px 40px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-  max-width: 600px; /* تكبير العرض */
+  max-width: 600px;
   width: 100%;
   z-index: 10;
   position: relative;
 }
+
 
 .login-form h2 {
   text-align: center;
@@ -118,4 +119,26 @@ button:hover:not(:disabled) {
 button:disabled {
   background: #99bdf8;
   cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    width: 90vw;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .login-form h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  input {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px;
+  }
 }
