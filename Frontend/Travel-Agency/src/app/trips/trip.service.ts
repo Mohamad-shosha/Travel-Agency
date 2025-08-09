@@ -8,12 +8,18 @@ export interface Trip {
   title: string;
   description: string;
   price: number;
-  startDate: string;       
+  startDate: string;
   endDate: string;
   availableSeats: number;
   imageUrl: string;
   cityId: number;
   cityName: string;
+  duration: number;
+  participants: number;
+  departureLocation: string;
+  rating: number;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  amenities: string[];
 }
 
 @Injectable({

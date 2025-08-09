@@ -65,21 +65,44 @@
     </button>
   </div>
 
-  <div *ngIf="mobileMenuOpen" class="lg:hidden mt-4 pb-4 border-t border-blue-200 bg-white/90 backdrop-blur-sm px-6 space-y-4 font-semibold text-blue-900">
-    <a routerLink="/trips" class="block hover:text-blue-600 transition-colors duration-300">Trips</a>
-    <a href="#services" class="block hover:text-blue-600 transition-colors duration-300">Services</a>
-    <a href="#contact" class="block hover:text-blue-600 transition-colors duration-300">Contact Us</a>
-    <a *ngIf="isLoggedIn" routerLink="/reservations" class="block hover:text-blue-600 transition-colors duration-300">My Reservations</a>
-    <a *ngIf="isAdmin" routerLink="/admin-dashboard" class="block hover:text-blue-600 transition-colors duration-300">Admin Dashboard</a>
-    <ng-container *ngIf="!isLoggedIn">
-      <a routerLink="/register" class="block hover:text-blue-600 transition-colors duration-300">Register</a>
-      <a routerLink="/login" class="block hover:text-blue-600 transition-colors duration-300">Login</a>
-    </ng-container>
-    <ng-container *ngIf="isLoggedIn">
-      <span class="block font-bold">{{ userEmail }}</span>
-      <button (click)="logout()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-md shadow-md transition duration-300 transform hover:scale-105 active:scale-95">
-        Logout
-      </button>
-    </ng-container>
+<div *ngIf="mobileMenuOpen" class="fixed inset-0 z-50">
+  <div (click)="mobileMenuOpen = false" class="flex-grow cursor-pointer"></div>
+
+  <div class="sidebar flex flex-col justify-between">
+    <ul class="space-y-4 font-semibold text-blue-900">
+      <li><a routerLink="/trips" class="block hover:text-blue-600 transition-colors duration-300">Trips</a></li>
+      <li><a href="#services" class="block hover:text-blue-600 transition-colors duration-300">Services</a></li>
+      <li><a href="#contact" class="block hover:text-blue-600 transition-colors duration-300">Contact Us</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/reservations" class="block hover:text-blue-600 transition-colors duration-300">My Reservations</a></li>
+      <li *ngIf="isAdmin"><a routerLink="/admin-dashboard" class="block hover:text-blue-600 transition-colors duration-300">Admin Dashboard</a></li>
+      <ng-container *ngIf="!isLoggedIn">
+        <li><a routerLink="/register" class="block hover:text-blue-600 transition-colors duration-300">Register</a></li>
+        <li><a routerLink="/login" class="block hover:text-blue-600 transition-colors duration-300">Login</a></li>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <li><span class="block font-bold">{{ userEmail }}</span></li>
+        <li>
+          <button (click)="logout()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-md shadow-md transition duration-300 transform hover:scale-105 active:scale-95">
+            Logout
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+
+    <div class="mt-6 pt-6 border-t border-blue-200 text-center">
+      <div class="flex justify-center mb-2">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-lg inline-block">
+          <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M2.5 19.5L21 12 2.5 4.5v5l15 2.5-15 2.5v5z" />
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Travela</h3>
+      <p class="mt-1 text-sm text-gray-600 px-4">
+        Premium Travel Experiences — Discover unforgettable trips with personalized service and expert guides.
+      </p>
+    </div>
   </div>
+</div>
+
 </nav>

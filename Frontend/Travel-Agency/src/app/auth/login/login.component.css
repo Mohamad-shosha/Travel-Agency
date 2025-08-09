@@ -32,8 +32,8 @@
   width: 100%;
   z-index: 10;
   position: relative;
+  box-sizing: border-box;
 }
-
 
 .login-form h2 {
   text-align: center;
@@ -63,6 +63,7 @@ label {
   font-size: 1rem;
   transition: border-color 0.3s;
   box-sizing: border-box;
+  color: #1e293b;
 }
 
 .input-group input:focus {
@@ -110,6 +111,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  box-sizing: border-box;
 }
 
 button:hover:not(:disabled) {
@@ -121,6 +123,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Responsive for small devices */
 @media (max-width: 480px) {
   .login-container {
     width: 90vw;
@@ -133,8 +136,13 @@ button:disabled {
     margin-bottom: 20px;
   }
 
-  input {
+  .input-group input {
     font-size: 0.9rem;
+    padding: 10px 36px 10px 12px;
+  }
+
+  .icon {
+    font-size: 1rem;
   }
 
   button {

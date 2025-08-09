@@ -43,7 +43,7 @@
   gap: 36px;
   margin: 0;
   padding: 0;
-  align-items: center; /* يحافظ على محاذاة العناصر عمودياً */
+  align-items: center;
 }
 
 .nav-links li a {
@@ -67,7 +67,6 @@
   cursor: pointer;
 }
 
-/* ستايل للزرار بتاع Logout */
 .nav-links li button {
   background-color: transparent;
   border: none;
@@ -99,7 +98,28 @@
   display: inline-block;
 }
 
-/* استايلات الريسبونسف زي ما عندك */
+.sidebar {
+  max-width: 16rem; /* 256px */
+  height: 100vh;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  overflow-y: auto;
+  z-index: 50;
+  background-color: white;
+  padding: 1.5rem; /* 24px */
+}
+
+.fixed.inset-0 {
+  position: fixed;
+  top: 0; bottom: 0; left: 0; right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  z-index: 1000;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;

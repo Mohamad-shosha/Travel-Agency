@@ -25,8 +25,8 @@
   width: 100%;
   z-index: 10;
   position: relative;
+  box-sizing: border-box;
 }
-
 
 .register-form h2 {
   text-align: center;
@@ -57,6 +57,7 @@ label {
   font-size: 0.9rem;
   transition: border-color 0.3s;
   box-sizing: border-box;
+  color: #1e293b;
 }
 
 .input-group input:focus {
@@ -104,6 +105,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  box-sizing: border-box;
 }
 
 button:hover:not(:disabled) {
@@ -115,6 +117,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Responsive */
 @media (max-width: 480px) {
   .register-container {
     width: 90vw;

@@ -36,7 +36,21 @@ public class Trip {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
+
+    private String difficulty;
+
+    @Column(columnDefinition = "TEXT")
+    private String amenities;
+
+    private String duration;
+
+    private Integer participants;
+
+    @Column(name = "departure_location")
+    private String departureLocation;
+
+    private Double rating;
 }

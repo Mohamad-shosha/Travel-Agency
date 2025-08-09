@@ -23,4 +23,11 @@ public class TripDTO {
 
     private Long cityId;
     private String cityName;
+
+    private String difficulty;
+    private String amenities;
+    private String duration;
+    private Integer participants;
+    private String departureLocation;
+    private Double rating;
 }
