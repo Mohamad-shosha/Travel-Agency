@@ -23,8 +23,6 @@
 
 .table-container {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  width: 100%;
   margin-bottom: 45px;
 }
 
@@ -170,25 +168,5 @@
   .btn {
     padding: 6px 10px;
     font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .users-table th,
-  .users-table td,
-  .reservations-table th,
-  .reservations-table td {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-  }
-
-  .btn {
-    padding: 5px 8px;
-    font-size: 0.8rem;
-  }
-
-  .role-select {
-    padding: 4px 8px;
-    font-size: 0.85rem;
   }
 }

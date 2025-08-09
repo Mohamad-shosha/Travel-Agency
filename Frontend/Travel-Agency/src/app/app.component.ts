@@ -28,14 +28,18 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private mouseX = -1000;
   private mouseY = -1000;
 
-  constructor(private renderer: Renderer2, private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        const url = event.urlAfterRedirects;
-        this.showSlider = !(url === '/login' || url === '/register'|| url.startsWith('/reservation')|| url.startsWith('/admin-dashboard') );
-      }
-    });
-  }
+constructor(private renderer: Renderer2, private router: Router) {
+  this.router.events.subscribe(event => {
+    if (event instanceof NavigationEnd) {
+      const url = event.urlAfterRedirects;
+      this.showSlider = !(url === '/login' || url === '/register' || url.startsWith('/reservation') || url.startsWith('/admin-dashboard'));
+
+      window.scrollTo(0, 0);
+
+    }
+  });
+}
+
 
   ngAfterViewInit() {
     this.setupCanvas();
