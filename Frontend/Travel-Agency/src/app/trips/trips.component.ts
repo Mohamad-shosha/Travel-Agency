@@ -33,7 +33,7 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.tripService.getAllTrips().subscribe({
       next: (data) => {
         this.trips = data;
-        this.startAutoScroll();
+        setTimeout(() => this.startAutoScroll(), 0);
       },
       error: (err) => console.error('Error loading trips:', err),
     });
@@ -41,12 +41,13 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     const container = this.scrollContainer.nativeElement;
-
-    container.addEventListener('scroll', () => {
-      this.applyScaleEffect();
-    });
-
+    container.addEventListener('scroll', this.debouncedCenterActiveCard);
     this.applyScaleEffect();
+  }
+
+  ngOnDestroy() {
+    this.stopAutoScroll();
+    this.scrollContainer.nativeElement.removeEventListener('scroll', this.debouncedCenterActiveCard);
   }
 
   applyScaleEffect() {
@@ -60,13 +61,50 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
       const distance = Math.abs(containerCenter - cardCenter);
       const maxDistance = element.clientWidth * 1.5;
 
-      let scale = 1 - Math.min(distance / maxDistance, 1) * 0.15;
+      const scale = 1 - Math.min(distance / maxDistance, 1) * 0.15;
       element.style.transform = `scale(${scale})`;
     });
   }
 
-  ngOnDestroy() {
-    this.stopAutoScroll();
+  centerActiveCard = () => {
+    const container = this.scrollContainer.nativeElement;
+    const cards = Array.from(container.querySelectorAll('.trip-card')) as HTMLElement[];
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+
+    let closestCard: HTMLElement | null = null;
+    let closestDistance = Infinity;
+
+    cards.forEach((card) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(containerCenter - cardCenter);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestCard = card;
+      }
+    });
+
+ if (closestCard) {
+  const cardRect = (closestCard as HTMLElement).getBoundingClientRect();
+  const scrollDelta = cardRect.left + cardRect.width / 2 - containerCenter;
+  container.scrollBy({ left: scrollDelta, behavior: 'smooth' });
+}
+
+
+    this.applyScaleEffect();
+  };
+
+  debouncedCenterActiveCard = this.debounce(() => {
+    this.centerActiveCard();
+  }, 200);
+
+  debounce(func: Function, wait: number) {
+    let timeout: any;
+    return (...args: any[]) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
   }
 
   onBookNow(trip: Trip) {
@@ -78,28 +116,50 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scrollLeft() {
-    this.scrollContainer.nativeElement.scrollBy({
-      left: -560,
+    const container = this.scrollContainer.nativeElement;
+    const card = container.querySelector('.trip-card') as HTMLElement;
+    if (!card) return;
+
+    const cardWidth = card.offsetWidth;
+    const gap = 16;
+
+    container.scrollBy({
+      left: -(cardWidth + gap),
       behavior: 'smooth',
     });
+
     this.resetAutoScroll();
   }
 
   scrollRight() {
-    this.scrollContainer.nativeElement.scrollBy({
-      left: 560,
+    const container = this.scrollContainer.nativeElement;
+    const card = container.querySelector('.trip-card') as HTMLElement;
+    if (!card) return;
+
+    const cardWidth = card.offsetWidth;
+    const gap = 16;
+
+    container.scrollBy({
+      left: cardWidth + gap,
       behavior: 'smooth',
     });
+
     this.resetAutoScroll();
   }
 
   startAutoScroll() {
     this.autoScrollIntervalId = setInterval(() => {
       const container = this.scrollContainer.nativeElement;
+      const card = container.querySelector('.trip-card') as HTMLElement;
+      if (!card) return;
+
+      const cardWidth = card.offsetWidth;
+      const gap = 16;
+
       if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
         container.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        container.scrollBy({ left: 280, behavior: 'smooth' });
+        container.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
       }
     }, 4000);
   }

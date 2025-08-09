@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
-
   tripId!: number;
   trip!: Trip;
   numberOfPeople: number = 1;
