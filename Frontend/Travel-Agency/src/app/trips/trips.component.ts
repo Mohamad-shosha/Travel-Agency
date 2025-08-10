@@ -23,6 +23,8 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
   private isManualScrolling = false;
   private userInteracted = false;
 
+  math = Math;
+
   constructor(
     private tripService: TripService,
     private authService: AuthService,

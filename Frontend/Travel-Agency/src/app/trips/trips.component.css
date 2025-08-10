@@ -13,8 +13,8 @@
 .container {
   max-width: 100%;
   width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 0 auto;
   text-align: center;
   position: relative;
@@ -144,10 +144,18 @@ h2 {
 }
 
 @media (max-width: 640px) {
-  .trip-card {
-    width: 90vw;
-    padding: 16px;
+  .trip-card p {
+    font-size: 0.9rem;
+    line-height: 1.3;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3.9em;
   }
+
 
   .trip-card img {
     height: 150px;

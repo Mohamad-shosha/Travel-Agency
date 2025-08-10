@@ -64,13 +64,21 @@
           </div>
           <div class="flex justify-between items-center">
             <span class="flex items-center space-x-1">
-              <ng-container *ngFor="let star of [1,2,3,4,5]; let idx = index">
-                <i
-                  class="fas"
-                  [ngClass]="idx < trip.rating ? 'fa-star text-yellow-400' : 'fa-star text-gray-300'"
-                  aria-hidden="true"
-                ></i>
-              </ng-container>
+<ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+  <i
+    class="fas"
+    [ngClass]="
+      (i + 1) <= math.floor(trip.rating) ? 'fa-star text-yellow-400' :
+      (i + 1) === math.ceil(trip.rating) && (trip.rating % 1) >= 0.5 ? 'fa-star-half-alt text-yellow-400' :
+      'fa-star text-gray-300'
+    "
+    aria-hidden="true"
+  ></i>
+</ng-container>
+
+
+
+
               <span class="ml-2 text-gray-500 font-normal">{{ trip.rating }} / 5</span>
             </span>
             <span
