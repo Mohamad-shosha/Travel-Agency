@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface TripRepository extends JpaRepository<Trip, Long> {
     List<Trip> findByCityId(Long cityId);
+
+    Trip getById(long tripId);
 }
