@@ -1,6 +1,35 @@
 <div class="reservation-container">
-  <h2>Book Trip: {{ trip.title }}</h2>
+  <div class="trip-header">
+    <img [src]="trip.imageUrl" alt="{{ trip.title }}" class="trip-image" />
+    <div class="trip-info">
+      <h2>Book Trip: {{ trip.title }}</h2>
+      <p class="city-name">{{ trip.cityName }}</p>
+      <p class="trip-duration">
+        Duration: {{ trip.duration }} days | Difficulty: <span class="difficulty">{{ trip.difficulty }}</span>
+      </p>
+      <p class="trip-rating">
+        Rating:
+        <span *ngFor="let star of starsArray; let i = index">
+          <i
+            class="star"
+            [class.filled]="i < trip.rating"
+            aria-hidden="true"
+          >&#9733;</i>
+        </span>
+        ({{ trip.rating.toFixed(1) }})
+      </p>
+      <p class="departure-location">Departure from: {{ trip.departureLocation }}</p>
+    </div>
+  </div>
+
   <p class="description">{{ trip.description }}</p>
+
+  <div class="amenities-container">
+    <span *ngFor="let amenity of trip.amenities" class="amenity">
+      {{ amenity }}
+    </span>
+  </div>
+
   <p><strong>Price per person:</strong> {{ trip.price }} USD</p>
   <p><strong>Available seats:</strong> {{ trip.availableSeats }}</p>
 

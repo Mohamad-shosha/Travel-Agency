@@ -26,16 +26,9 @@ export class ReservationService {
   }
 
   createReservation(tripId: number, numberOfPeople: number): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
-
-  const body = { tripId, numberOfPeople };
-  return this.http.post(`${this.baseUrl}`, body, { headers });
-}
-
+    const body = { tripId, numberOfPeople };
+    return this.http.post(`${this.baseUrl}`, body, { headers: this.getHeaders() });
+  }
 
   cancelReservationWithReason(reservationId: number, reason: string): Observable<string> {
     const body = { cancelReason: reason };

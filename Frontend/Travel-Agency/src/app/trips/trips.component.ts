@@ -17,11 +17,11 @@ import { Router } from '@angular/router';
 })
 export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
   trips: Trip[] = [];
-
   @ViewChild('scrollContainer', { static: false })
   scrollContainer!: ElementRef<HTMLDivElement>;
-
   private autoScrollIntervalId: any;
+  private isManualScrolling = false;
+  private userInteracted = false;
 
   constructor(
     private tripService: TripService,
@@ -47,20 +47,21 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopAutoScroll();
-    this.scrollContainer.nativeElement.removeEventListener('scroll', this.debouncedCenterActiveCard);
+    this.scrollContainer.nativeElement.removeEventListener(
+      'scroll',
+      this.debouncedCenterActiveCard
+    );
   }
 
   applyScaleEffect() {
     const container = this.scrollContainer.nativeElement;
     const cards = container.querySelectorAll('.trip-card');
     const containerCenter = container.scrollLeft + container.clientWidth / 2;
-
     cards.forEach((card) => {
       const element = card as HTMLElement;
       const cardCenter = element.offsetLeft + element.clientWidth / 2;
       const distance = Math.abs(containerCenter - cardCenter);
       const maxDistance = element.clientWidth * 1.5;
-
       const scale = 1 - Math.min(distance / maxDistance, 1) * 0.15;
       element.style.transform = `scale(${scale})`;
     });
@@ -68,13 +69,13 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   centerActiveCard = () => {
     const container = this.scrollContainer.nativeElement;
-    const cards = Array.from(container.querySelectorAll('.trip-card')) as HTMLElement[];
+    const cards = Array.from(
+      container.querySelectorAll('.trip-card')
+    ) as HTMLElement[];
     const containerRect = container.getBoundingClientRect();
     const containerCenter = containerRect.left + containerRect.width / 2;
-
     let closestCard: HTMLElement | null = null;
     let closestDistance = Infinity;
-
     cards.forEach((card) => {
       const cardRect = card.getBoundingClientRect();
       const cardCenter = cardRect.left + cardRect.width / 2;
@@ -84,19 +85,18 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
         closestCard = card;
       }
     });
-
- if (closestCard) {
-  const cardRect = (closestCard as HTMLElement).getBoundingClientRect();
-  const scrollDelta = cardRect.left + cardRect.width / 2 - containerCenter;
-  container.scrollBy({ left: scrollDelta, behavior: 'smooth' });
-}
-
-
+    if (closestCard) {
+      const cardRect = (closestCard as HTMLElement).getBoundingClientRect();
+      const scrollDelta = cardRect.left + cardRect.width / 2 - containerCenter;
+      container.scrollBy({ left: scrollDelta, behavior: 'smooth' });
+    }
     this.applyScaleEffect();
   };
 
   debouncedCenterActiveCard = this.debounce(() => {
-    this.centerActiveCard();
+    if (!this.isManualScrolling) {
+      this.centerActiveCard();
+    }
   }, 200);
 
   debounce(func: Function, wait: number) {
@@ -116,52 +116,58 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scrollLeft() {
+    this.userInteracted = true;
+    this.isManualScrolling = true;
     const container = this.scrollContainer.nativeElement;
     const card = container.querySelector('.trip-card') as HTMLElement;
     if (!card) return;
-
     const cardWidth = card.offsetWidth;
     const gap = 16;
-
     container.scrollBy({
       left: -(cardWidth + gap),
       behavior: 'smooth',
     });
-
     this.resetAutoScroll();
+    setTimeout(() => {
+      this.isManualScrolling = false;
+    }, 500);
   }
 
   scrollRight() {
+    this.userInteracted = true;
+    this.isManualScrolling = true;
     const container = this.scrollContainer.nativeElement;
     const card = container.querySelector('.trip-card') as HTMLElement;
     if (!card) return;
-
     const cardWidth = card.offsetWidth;
     const gap = 16;
-
     container.scrollBy({
       left: cardWidth + gap,
       behavior: 'smooth',
     });
-
     this.resetAutoScroll();
+    setTimeout(() => {
+      this.isManualScrolling = false;
+    }, 500);
   }
 
   startAutoScroll() {
     this.autoScrollIntervalId = setInterval(() => {
+      if (this.userInteracted) return;
       const container = this.scrollContainer.nativeElement;
       const card = container.querySelector('.trip-card') as HTMLElement;
       if (!card) return;
-
       const cardWidth = card.offsetWidth;
       const gap = 16;
-
-      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+      if (
+        container.scrollLeft + container.clientWidth >=
+        container.scrollWidth
+      ) {
         container.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         container.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
       }
-    }, 4000);
+    }, 8000);
   }
 
   stopAutoScroll() {
@@ -173,6 +179,10 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   resetAutoScroll() {
     this.stopAutoScroll();
-    setTimeout(() => this.startAutoScroll(), 7000);
+    this.userInteracted = true;
+    setTimeout(() => {
+      this.userInteracted = false;
+      this.startAutoScroll();
+    }, 10000);
   }
 }

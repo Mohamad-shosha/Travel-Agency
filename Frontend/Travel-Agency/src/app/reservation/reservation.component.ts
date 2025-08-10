@@ -17,6 +17,8 @@ export class ReservationComponent implements OnInit {
   loading: boolean = false;
   errorMessage: string = '';
 
+    starsArray: number[] = [1, 2, 3, 4, 5];
+
   constructor(
     private route: ActivatedRoute,
     private tripService: TripService,
