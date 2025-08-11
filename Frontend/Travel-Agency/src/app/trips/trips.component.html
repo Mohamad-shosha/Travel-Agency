@@ -1,4 +1,6 @@
-<section class="trips-section py-20 bg-gradient-to-br from-blue-50 to-purple-50 min-h-[350px] relative">
+<section
+  class="trips-section py-20 bg-gradient-to-br from-blue-50 to-purple-50 min-h-[350px] relative"
+>
   <div class="container mx-auto px-6 max-w-7xl relative">
     <h2 class="text-4xl font-extrabold text-center text-blue-900 mb-12">
       Explore Egyptian Treasures
@@ -10,7 +12,12 @@
       aria-label="Scroll Left"
       type="button"
     >
-      <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true" focusable="false">
+      <svg
+        viewBox="0 0 24 24"
+        class="arrow-icon"
+        aria-hidden="true"
+        focusable="false"
+      >
         <path d="M15 18l-6-6 6-6" />
       </svg>
     </button>
@@ -28,20 +35,29 @@
         role="listitem"
         tabindex="0"
       >
-        <img
-          [src]="trip.imageUrl"
-          [alt]="trip.title"
-          class="rounded-2xl object-cover w-full h-52 mb-6 shadow-md transition-transform duration-300"
-          loading="lazy"
-          decoding="async"
-        />
+        <div class="image-wrapper">
+          <img
+            [src]="trip.imageUrl"
+            [alt]="trip.title"
+            loading="lazy"
+            decoding="async"
+          />
+        <button
+  (click)="openReviewModal(trip)"
+  [attr.aria-label]="'Add review for ' + trip.title"
+  class="review-icon-btn"
+  type="button"
+>
+            <i class="fas fa-comment-dots"></i>
+          </button>
+        </div>
 
-        <h3 class="text-2xl font-semibold text-blue-800 mb-3">{{ trip.title }}</h3>
-        <p class="text-blue-700 mb-4 flex-grow leading-relaxed">
-          {{ trip.description }}
-        </p>
+        <h3 class="trip-title">{{ trip.title }}</h3>
+        <p class="trip-description">{{ trip.description }}</p>
 
-        <div class="trip-details mb-5 text-blue-600 font-semibold space-y-2 text-sm sm:text-base">
+        <div
+          class="trip-details mb-5 text-blue-600 font-semibold space-y-2 text-sm sm:text-base"
+        >
           <div class="flex justify-between">
             <span class="flex items-center space-x-2">
               <i class="fas fa-clock"></i>
@@ -64,22 +80,25 @@
           </div>
           <div class="flex justify-between items-center">
             <span class="flex items-center space-x-1">
-<ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
-  <i
-    class="fas"
-    [ngClass]="
-      (i + 1) <= math.floor(trip.rating) ? 'fa-star text-yellow-400' :
-      (i + 1) === math.ceil(trip.rating) && (trip.rating % 1) >= 0.5 ? 'fa-star-half-alt text-yellow-400' :
-      'fa-star text-gray-300'
-    "
-    aria-hidden="true"
-  ></i>
-</ng-container>
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                <i
+                  class="fas"
+                  [ngClass]="
+                    (i + 1) <= math.floor(trip.rating)
+                      ? 'fa-star text-yellow-400'
+                      : (i + 1) === math.ceil(trip.rating) &&
+                        (trip.rating % 1) >= 0.5
+                      ? 'fa-star-half-alt text-yellow-400'
+                      : 'fa-star text-gray-300'
+                  "
+                  aria-hidden="true"
+                ></i>
+              </ng-container>
 
-
-
-
-              <span class="ml-2 text-gray-500 font-normal">{{ trip.rating }} / 5</span>
+              <span class="ml-2 text-gray-500 font-normal">{{
+                trip.rating
+              }}
+              / 5</span>
             </span>
             <span
               class="difficulty px-3 py-1 rounded-full font-semibold text-xs sm:text-sm"
@@ -94,28 +113,52 @@
           </div>
         </div>
 
-        <ul class="amenities mb-5 flex flex-wrap gap-3 text-xs sm:text-sm text-blue-700 font-medium">
-          <li class="flex items-center space-x-2" *ngIf="trip.amenities.includes('Meals')">
-            <i class="fas fa-utensils" aria-hidden="true"></i><span>Meals Included</span>
+        <ul
+          class="amenities mb-5 flex flex-wrap gap-3 text-xs sm:text-sm text-blue-700 font-medium"
+        >
+          <li
+            class="flex items-center space-x-2"
+            *ngIf="trip.amenities.includes('Meals')"
+          >
+            <i class="fas fa-utensils" aria-hidden="true"></i><span
+              >Meals Included</span
+            >
           </li>
-          <li class="flex items-center space-x-2" *ngIf="trip.amenities.includes('Transport')">
-            <i class="fas fa-bus" aria-hidden="true"></i><span>Transportation</span>
+          <li
+            class="flex items-center space-x-2"
+            *ngIf="trip.amenities.includes('Transport')"
+          >
+            <i class="fas fa-bus" aria-hidden="true"></i><span
+              >Transportation</span
+            >
           </li>
-          <li class="flex items-center space-x-2" *ngIf="trip.amenities.includes('Guide')">
+          <li
+            class="flex items-center space-x-2"
+            *ngIf="trip.amenities.includes('Guide')"
+          >
             <i class="fas fa-user-tie" aria-hidden="true"></i><span>Tour Guide</span>
           </li>
-          <li class="flex items-center space-x-2" *ngIf="trip.amenities.includes('WiFi')">
+          <li
+            class="flex items-center space-x-2"
+            *ngIf="trip.amenities.includes('WiFi')"
+          >
             <i class="fas fa-wifi" aria-hidden="true"></i><span>WiFi Available</span>
           </li>
         </ul>
 
-        <div class="flex justify-between items-center mb-5 text-blue-600 font-semibold text-sm sm:text-base">
-          <p class="flex items-center space-x-2 hover:text-blue-800 transition-colors" aria-label="Price">
+        <div
+          class="flex justify-between items-center mb-5 text-blue-600 font-semibold text-sm sm:text-base"
+        >
+          <p
+            class="flex items-center space-x-2 hover:text-blue-800 transition-colors"
+            aria-label="Price"
+          >
             <i class="fas fa-dollar-sign text-base sm:text-xl" aria-hidden="true"></i>
             <span>${{ trip.price.toLocaleString() }} USD</span>
           </p>
           <p class="text-gray-500 italic text-xs sm:text-sm" aria-label="Trip Dates">
-            Dates: {{ trip.startDate | date:'MMM d' }} - {{ trip.endDate | date:'MMM d' }}
+            Dates: {{ trip.startDate | date: 'MMM d' }} -
+            {{ trip.endDate | date: 'MMM d' }}
           </p>
         </div>
 
@@ -136,11 +179,50 @@
       aria-label="Scroll Right"
       type="button"
     >
-      <svg viewBox="0 0 24 24" class="arrow-icon" aria-hidden="true" focusable="false">
+      <svg
+        viewBox="0 0 24 24"
+        class="arrow-icon"
+        aria-hidden="true"
+        focusable="false"
+      >
         <path d="M9 6l6 6-6 6" />
       </svg>
     </button>
   </div>
 </section>
+
+<!-- مودال إضافة المراجعة -->
+<div *ngIf="reviewModalOpen" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-content">
+    <h3 id="modalTitle" class="mb-4 text-xl font-semibold text-blue-900">
+      Add Review for {{ newReview.nameOfTrip }}
+    </h3>
+
+    <label>
+      Your Name:
+      <input type="text" [(ngModel)]="newReview.name" />
+    </label>
+
+    <label>
+      Comment:
+      <textarea rows="4" [(ngModel)]="newReview.comment"></textarea>
+    </label>
+
+    <label>
+      Rating:
+      <select [(ngModel)]="newReview.rate">
+        <option value="0">Select rating</option>
+        <option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">
+          {{ star }} Star{{ star > 1 ? 's' : '' }}
+        </option>
+      </select>
+    </label>
+
+    <div class="modal-buttons">
+      <button (click)="submitReview()" class="btn-submit">Submit</button>
+      <button (click)="closeReviewModal()" class="btn-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <app-services></app-services>

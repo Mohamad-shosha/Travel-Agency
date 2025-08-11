@@ -30,6 +30,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ServicesComponent } from './services/services.component';
 import { GetInTouchComponent } from './get-in-touch/get-in-touch.component';
+import { ReviewListComponent } from './review-list/review-list.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { GetInTouchComponent } from './get-in-touch/get-in-touch.component';
     ReservationsComponent,
     AdminDashboardComponent,
     ServicesComponent,
-    GetInTouchComponent
+    GetInTouchComponent,
+    ReviewListComponent
   ],
   imports: [
     BrowserModule,

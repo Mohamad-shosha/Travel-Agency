@@ -9,6 +9,9 @@ import {
 import { TripService, Trip } from './trip.service';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { ReviewService, Review } from '../review-list/review.service';
+import { HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-trips',
@@ -25,10 +28,22 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   math = Math;
 
+  reviewModalOpen: boolean = false;
+  newReview: Review & { tripId?: number } = {
+    name: '',
+    nameOfTrip: '',
+    imageUrl: '',
+    comment: '',
+    rate: 0,
+    reviewDate: new Date().toISOString(),
+    tripId: undefined,
+  };
+
   constructor(
     private tripService: TripService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit() {
@@ -71,9 +86,7 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   centerActiveCard = () => {
     const container = this.scrollContainer.nativeElement;
-    const cards = Array.from(
-      container.querySelectorAll('.trip-card')
-    ) as HTMLElement[];
+    const cards = Array.from(container.querySelectorAll('.trip-card')) as HTMLElement[];
     const containerRect = container.getBoundingClientRect();
     const containerCenter = containerRect.left + containerRect.width / 2;
     let closestCard: HTMLElement | null = null;
@@ -116,6 +129,78 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['/reservation', trip.id]);
     }
   }
+
+  openReviewModal(trip: Trip) {
+    this.newReview = {
+      name: '',
+      nameOfTrip: trip.title,
+      imageUrl: trip.imageUrl,
+      comment: '',
+      rate: 0,
+      reviewDate: new Date().toISOString(),
+      tripId: trip.id,
+    };
+    this.reviewModalOpen = true;
+  }
+
+  closeReviewModal() {
+    this.reviewModalOpen = false;
+  }
+
+submitReview() {
+  if (!this.newReview.name.trim() || !this.newReview.comment.trim() || this.newReview.rate <= 0) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Incomplete',
+      text: 'Please fill all review fields',
+      timer: 2500,
+      showConfirmButton: false,
+      timerProgressBar: true,
+    });
+    return;
+  }
+
+  const token = this.authService.getToken();
+
+  if (!token) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Not logged in',
+      text: 'You must be logged in to submit a review.',
+      timer: 2500,
+      showConfirmButton: false,
+      timerProgressBar: true,
+    });
+    return;
+  }
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  this.reviewService.createReview(this.newReview, headers).subscribe({
+    next: () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Review Submitted',
+        text: 'Review submitted successfully!',
+        timer: 2500,
+        showConfirmButton: false,
+        timerProgressBar: true,
+      });
+      this.closeReviewModal();
+    },
+    error: () => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error submitting review',
+        timer: 2500,
+        showConfirmButton: false,
+        timerProgressBar: true,
+      });
+    },
+  });
+}
+
 
   scrollLeft() {
     this.userInteracted = true;
@@ -161,10 +246,7 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
       if (!card) return;
       const cardWidth = card.offsetWidth;
       const gap = 16;
-      if (
-        container.scrollLeft + container.clientWidth >=
-        container.scrollWidth
-      ) {
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
         container.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         container.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });

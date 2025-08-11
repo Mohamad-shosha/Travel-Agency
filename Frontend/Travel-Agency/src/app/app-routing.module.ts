@@ -8,6 +8,7 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { ServicesComponent } from './services/services.component';  
+import { ReviewListComponent } from './review-list/review-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'trips', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'reservation/:id', component: ReservationComponent } ,
   { path: 'admin-dashboard', component: AdminDashboardComponent },
-  { path: 'reservations', component: ReservationsComponent }
+  { path: 'reservations', component: ReservationsComponent },
+  { path: 'review-list', component: ReviewListComponent },
 ];
 
 @NgModule({

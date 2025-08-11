@@ -1,0 +1,70 @@
+<section class="reviews-section" aria-label="Customer testimonials">
+  <div class="container">
+    <h2 id="reviews-heading">What Our Customers Say</h2>
+
+    <div class="carousel-wrapper">
+      <button
+        class="nav-btn prev-btn"
+        aria-label="Previous review"
+        (click)="scrollPrev()"
+        type="button"
+      >
+        ‹
+      </button>
+
+      <div
+        #scrollContainer
+        class="reviews-carousel"
+        tabindex="0"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Customer reviews carousel"
+        aria-labelledby="reviews-heading"
+        (mouseenter)="pauseScroll()"
+        (mouseleave)="resumeScroll()"
+        (focusin)="pauseScroll()"
+        (focusout)="resumeScroll()"
+      >
+        <div
+          *ngFor="let review of reviews; let idx = index"
+          class="review-card"
+          tabindex="0"
+          role="group"
+          aria-roledescription="slide"
+          [attr.aria-label]="'Review ' + (idx + 1) + ' by ' + review.name + ', rated ' + review.rate + ' out of 5 stars'"
+        >
+          <div
+            class="stars"
+            role="img"
+            [attr.aria-label]="'Rating: ' + review.rate + ' out of 5 stars'"
+            aria-hidden="false"
+          >
+            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+              <i
+                class="fas fa-star"
+                [ngClass]="(i + 1) <= review.rate ? 'active-star' : 'inactive-star'"
+                aria-hidden="true"
+              ></i>
+            </ng-container>
+          </div>
+
+          <blockquote class="comment" aria-live="polite">“{{ review.comment }}”</blockquote>
+
+          <footer class="reviewer">
+            <p>{{ review.name }}</p>
+            <time [attr.datetime]="review.reviewDate">{{ review.reviewDate | date: 'longDate' }}</time>
+          </footer>
+        </div>
+      </div>
+
+      <button
+        class="nav-btn next-btn"
+        aria-label="Next review"
+        (click)="scrollNext()"
+        type="button"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+</section>
