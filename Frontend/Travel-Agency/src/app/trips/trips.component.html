@@ -29,8 +29,7 @@
       role="list"
       aria-label="List of Egyptian trips"
     >
-      <div
-        *ngFor="let trip of trips"
+     <div *ngFor="let trip of filteredTrips" class="trip-card"
         class="trip-card snap-center bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer p-6 flex-shrink-0 flex flex-col"
         role="listitem"
         tabindex="0"

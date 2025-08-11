@@ -44,45 +44,49 @@
       </div>
 
       <div>
-        <h4 class="font-semibold mb-6 text-lg">Popular Destinations in Egypt</h4>
-        <ul class="space-y-3 text-gray-300">
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Cairo</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Alexandria</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Luxor</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Aswan</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Sharm El Sheikh</a>
-          </li>
-        </ul>
-      </div>
+  <h4 class="font-semibold mb-6 text-lg">Popular Destinations in Egypt</h4>
+  <div class="flex gap-16">
+    <!-- العمود الأول -->
+    <div>
+      <ul class="space-y-3 text-gray-300">
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Cairo' }" class="hover:text-blue-400 transition-colors">Cairo</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Luxor' }" class="hover:text-blue-400 transition-colors">Luxor</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Aswan' }" class="hover:text-blue-400 transition-colors">Aswan</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Alexandria' }" class="hover:text-blue-400 transition-colors">Alexandria</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Giza' }" class="hover:text-blue-400 transition-colors">Giza</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Port Said' }" class="hover:text-blue-400 transition-colors">Port Said</a></li>
+      </ul>
+    </div>
+
+    <!-- العمود الثاني -->
+    <div>
+      <ul class="space-y-3 text-gray-300">
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Hurghada' }" class="hover:text-blue-400 transition-colors">Hurghada</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Dahab' }" class="hover:text-blue-400 transition-colors">Dahab</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'El Gouna' }" class="hover:text-blue-400 transition-colors">El Gouna</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Marsa Matruh' }" class="hover:text-blue-400 transition-colors">Marsa Matruh</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Ismailia' }" class="hover:text-blue-400 transition-colors">Ismailia</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Suez' }" class="hover:text-blue-400 transition-colors">Suez</a></li>
+      </ul>
+    </div>
+
+
+
+  </div>
+</div>
 
       <div>
         <h4 class="font-semibold mb-6 text-lg">Travel Services</h4>
-        <ul class="space-y-3 text-gray-300">
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Egypt Tours</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Nile Cruises</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Desert Safaris</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Group Travel</a>
-          </li>
-          <li>
-            <a href="#" class="hover:text-blue-400 transition-colors">Visa Assistance</a>
-          </li>
-        </ul>
+         <div>
+      <ul class="space-y-3 text-gray-300">
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Fayoum' }" class="hover:text-blue-400 transition-colors">Fayoum</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Sharm El-Sheikh' }" class="hover:text-blue-400 transition-colors">Sharm El-Sheikh</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Tanta' }" class="hover:text-blue-400 transition-colors">Tanta</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Mansoura' }" class="hover:text-blue-400 transition-colors">Mansoura</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Zagazig' }" class="hover:text-blue-400 transition-colors">Zagazig</a></li>
+        <li><a [routerLink]="['/trips']" [queryParams]="{ city: 'Minya' }" class="hover:text-blue-400 transition-colors">Minya</a></li>
+      </ul>
+    </div>
       </div>
 
       <div>

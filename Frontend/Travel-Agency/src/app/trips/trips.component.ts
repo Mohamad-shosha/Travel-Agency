@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { TripService, Trip } from './trip.service';
 import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReviewService, Review } from '../review-list/review.service';
 import { HttpHeaders } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -20,8 +20,11 @@ import Swal from 'sweetalert2';
 })
 export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
   trips: Trip[] = [];
+  filteredTrips: Trip[] = [];
+
   @ViewChild('scrollContainer', { static: false })
   scrollContainer!: ElementRef<HTMLDivElement>;
+
   private autoScrollIntervalId: any;
   private isManualScrolling = false;
   private userInteracted = false;
@@ -43,20 +46,35 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
     private tripService: TripService,
     private authService: AuthService,
     private router: Router,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.tripService.getAllTrips().subscribe({
       next: (data) => {
         this.trips = data;
-        setTimeout(() => this.startAutoScroll(), 0);
+
+        // استمع ل queryParams للفلترة
+        this.route.queryParams.subscribe((params) => {
+          const city = params['city'];
+          const service = params['service'];
+
+          this.filteredTrips = this.trips.filter(
+            (trip) =>
+              (!city || trip.cityName === city) &&
+              (!service || trip.amenities.includes(service))
+          );
+
+          setTimeout(() => this.startAutoScroll(), 0);
+        });
       },
       error: (err) => console.error('Error loading trips:', err),
     });
   }
 
   ngAfterViewInit() {
+    if (!this.scrollContainer) return;
     const container = this.scrollContainer.nativeElement;
     container.addEventListener('scroll', this.debouncedCenterActiveCard);
     this.applyScaleEffect();
@@ -64,13 +82,16 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopAutoScroll();
-    this.scrollContainer.nativeElement.removeEventListener(
-      'scroll',
-      this.debouncedCenterActiveCard
-    );
+    if (this.scrollContainer) {
+      this.scrollContainer.nativeElement.removeEventListener(
+        'scroll',
+        this.debouncedCenterActiveCard
+      );
+    }
   }
 
   applyScaleEffect() {
+    if (!this.scrollContainer) return;
     const container = this.scrollContainer.nativeElement;
     const cards = container.querySelectorAll('.trip-card');
     const containerCenter = container.scrollLeft + container.clientWidth / 2;
@@ -85,8 +106,11 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   centerActiveCard = () => {
+    if (!this.scrollContainer) return;
     const container = this.scrollContainer.nativeElement;
-    const cards = Array.from(container.querySelectorAll('.trip-card')) as HTMLElement[];
+    const cards = Array.from(
+      container.querySelectorAll('.trip-card')
+    ) as HTMLElement[];
     const containerRect = container.getBoundingClientRect();
     const containerCenter = containerRect.left + containerRect.width / 2;
     let closestCard: HTMLElement | null = null;
@@ -147,68 +171,72 @@ export class TripsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.reviewModalOpen = false;
   }
 
-submitReview() {
-  if (!this.newReview.name.trim() || !this.newReview.comment.trim() || this.newReview.rate <= 0) {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Incomplete',
-      text: 'Please fill all review fields',
-      timer: 2500,
-      showConfirmButton: false,
-      timerProgressBar: true,
-      width: window.innerWidth < 600 ? '65%' : '300px',
-    });
-    return;
-  }
-
-  const token = this.authService.getToken();
-
-  if (!token) {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Not logged in',
-      text: 'You must be logged in to submit a review.',
-      timer: 2500,
-      showConfirmButton: false,
-      timerProgressBar: true,
-      width: window.innerWidth < 600 ? '65%' : '300px',
-    });
-    return;
-  }
-
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-  this.reviewService.createReview(this.newReview, headers).subscribe({
-    next: () => {
+  submitReview() {
+    if (
+      !this.newReview.name.trim() ||
+      !this.newReview.comment.trim() ||
+      this.newReview.rate <= 0
+    ) {
       Swal.fire({
-        icon: 'success',
-        title: 'Review Submitted',
-        text: 'Review submitted successfully!',
+        icon: 'warning',
+        title: 'Incomplete',
+        text: 'Please fill all review fields',
         timer: 2500,
         showConfirmButton: false,
         timerProgressBar: true,
         width: window.innerWidth < 600 ? '65%' : '300px',
       });
-      this.closeReviewModal();
-    },
-    error: () => {
+      return;
+    }
+
+    const token = this.authService.getToken();
+
+    if (!token) {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error submitting review',
+        icon: 'warning',
+        title: 'Not logged in',
+        text: 'You must be logged in to submit a review.',
         timer: 2500,
         showConfirmButton: false,
         timerProgressBar: true,
         width: window.innerWidth < 600 ? '65%' : '300px',
       });
-    },
-  });
-}
+      return;
+    }
 
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.reviewService.createReview(this.newReview, headers).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Review Submitted',
+          text: 'Review submitted successfully!',
+          timer: 2500,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          width: window.innerWidth < 600 ? '65%' : '300px',
+        });
+        this.closeReviewModal();
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error submitting review',
+          timer: 2500,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          width: window.innerWidth < 600 ? '65%' : '300px',
+        });
+      },
+    });
+  }
 
   scrollLeft() {
     this.userInteracted = true;
     this.isManualScrolling = true;
+    if (!this.scrollContainer) return;
     const container = this.scrollContainer.nativeElement;
     const card = container.querySelector('.trip-card') as HTMLElement;
     if (!card) return;
@@ -227,6 +255,7 @@ submitReview() {
   scrollRight() {
     this.userInteracted = true;
     this.isManualScrolling = true;
+    if (!this.scrollContainer) return;
     const container = this.scrollContainer.nativeElement;
     const card = container.querySelector('.trip-card') as HTMLElement;
     if (!card) return;
@@ -245,6 +274,7 @@ submitReview() {
   startAutoScroll() {
     this.autoScrollIntervalId = setInterval(() => {
       if (this.userInteracted) return;
+      if (!this.scrollContainer) return;
       const container = this.scrollContainer.nativeElement;
       const card = container.querySelector('.trip-card') as HTMLElement;
       if (!card) return;
