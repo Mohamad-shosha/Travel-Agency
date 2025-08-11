@@ -54,14 +54,24 @@ export class ReservationsComponent implements OnInit {
 
   confirmCancellation(): void {
     if (!this.selectedReason) {
-      Swal.fire('Error', 'Please select a reason', 'warning');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Error',
+        text: 'Please select a reason',
+        width: window.innerWidth < 600 ? '65%' : '300px',
+      });
       return;
     }
 
     const reasonToSend = this.selectedReason === 'OTHER' ? this.customReason.trim() : this.selectedReason;
 
     if (this.selectedReason === 'OTHER' && !reasonToSend) {
-      Swal.fire('Error', 'Please enter a custom reason', 'warning');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Error',
+        text: 'Please enter a custom reason',
+        width: window.innerWidth < 600 ? '65%' : '300px',
+      });
       return;
     }
 
@@ -73,7 +83,8 @@ export class ReservationsComponent implements OnInit {
           text: message,
           timer: 2500,
           showConfirmButton: false,
-          timerProgressBar: true
+          timerProgressBar: true,
+          width: window.innerWidth < 600 ? '65%' : '300px',
         });
         const reservation = this.reservations.find(r => r.id === this.selectedReservationId);
         if (reservation) {
@@ -83,7 +94,12 @@ export class ReservationsComponent implements OnInit {
         this.closeCancelModal();
       },
       error: () => {
-        Swal.fire('Error', 'Failed to cancel reservation', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to cancel reservation',
+          width: window.innerWidth < 600 ? '65%' : '300px',
+        });
       }
     });
   }
@@ -103,7 +119,8 @@ export class ReservationsComponent implements OnInit {
           text: message,
           timer: 2500,
           showConfirmButton: false,
-          timerProgressBar: true
+          timerProgressBar: true,
+          width: window.innerWidth < 600 ? '65%' : '300px',
         });
         const reservation = this.reservations.find(r => r.id === id);
         if (reservation) {
@@ -112,7 +129,12 @@ export class ReservationsComponent implements OnInit {
         }
       },
       error: () => {
-        Swal.fire('Error', 'Failed to restore reservation', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to restore reservation',
+          width: window.innerWidth < 600 ? '65%' : '300px',
+        });
       }
     });
   }

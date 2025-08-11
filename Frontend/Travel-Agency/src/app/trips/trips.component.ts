@@ -156,6 +156,7 @@ submitReview() {
       timer: 2500,
       showConfirmButton: false,
       timerProgressBar: true,
+      width: window.innerWidth < 600 ? '65%' : '300px',
     });
     return;
   }
@@ -170,6 +171,7 @@ submitReview() {
       timer: 2500,
       showConfirmButton: false,
       timerProgressBar: true,
+      width: window.innerWidth < 600 ? '65%' : '300px',
     });
     return;
   }
@@ -185,6 +187,7 @@ submitReview() {
         timer: 2500,
         showConfirmButton: false,
         timerProgressBar: true,
+        width: window.innerWidth < 600 ? '65%' : '300px',
       });
       this.closeReviewModal();
     },
@@ -196,6 +199,7 @@ submitReview() {
         timer: 2500,
         showConfirmButton: false,
         timerProgressBar: true,
+        width: window.innerWidth < 600 ? '65%' : '300px',
       });
     },
   });

@@ -51,7 +51,8 @@ export class ReservationComponent implements OnInit {
           text: 'Your trip reservation was completed successfully.',
           timer: 2500,
           showConfirmButton: false,
-          timerProgressBar: true
+          timerProgressBar: true,
+          width: window.innerWidth < 600 ? '65%' : '300px'
         });
         this.router.navigate(['/trips']);
       },
@@ -62,7 +63,8 @@ export class ReservationComponent implements OnInit {
           title: 'Reservation Failed',
           text: 'Failed to make reservation. Please try again later.',
           footer: err.message || '',
-          showConfirmButton: true
+          showConfirmButton: true,
+          width: window.innerWidth < 600 ? '65%' : '300px',
         });
       }
     });
