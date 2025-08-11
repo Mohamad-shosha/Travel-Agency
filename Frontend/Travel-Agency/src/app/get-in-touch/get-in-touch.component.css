@@ -9,3 +9,21 @@
   border-color: rgba(252, 211, 77, 1); /* أصفر */
   box-shadow: 0 0 8px rgba(252, 211, 77, 0.5);
 }
+@media (max-width: 768px) {
+  #contact h2,
+  #contact h3,
+  #contact span {
+    font-size: 1.5rem;
+  }
+
+  #contact p,
+  #contact input,
+  #contact textarea,
+  #contact .input-field {
+    font-size: 0.9rem;
+  }
+
+  #contact button {
+    font-size: 1rem;
+  }
+}

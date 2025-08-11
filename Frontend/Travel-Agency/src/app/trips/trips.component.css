@@ -133,10 +133,10 @@ h2 {
   text-overflow: ellipsis;
 }
 
-/* باقي التنسيقات اللي عندك ممكن تدمجها هنا */
-
-/* Responsive للموبايل */
 @media (max-width: 640px) {
+  h2 {
+  font-size: 1.5rem;
+}
   .trip-card {
     width: 90vw;
     padding: 12px;
