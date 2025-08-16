@@ -5,13 +5,14 @@ import com.travel.agency.dto.UserDTO;
 import com.travel.agency.entities.enums.CancellationReasonOption;
 import com.travel.agency.repositories.UserRepository;
 import com.travel.agency.services.ReservationService;
-import com.travel.agency.util.mapper.ReservationMapper;
+import com.travel.agency.services.TripService;
+import com.travel.agency.services.UserService;
 import com.travel.agency.util.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +26,7 @@ public class AdminController {
 
     private final ReservationService reservationService;
     private final UserRepository userRepository;
+    private final UserService userService;
     private final UserMapper userMapper;
 
     @GetMapping("/reservations")
@@ -51,4 +53,8 @@ public class AdminController {
                 .collect(Collectors.toList());
     }
 
+    @PutMapping("/promote/{id}")
+    public UserDTO promoteUserToAdmin(@PathVariable long id){
+        return userService.promoteUserToAdmin(id);
+    }
 }

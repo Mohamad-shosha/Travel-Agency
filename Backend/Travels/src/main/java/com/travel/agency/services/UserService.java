@@ -15,4 +15,6 @@ public interface UserService {
     UserDTO saveUser(UserDTO userDTO);
 
     public UserDTO findUserByName(String Name);
+
+    public UserDTO promoteUserToAdmin(Long id);
 }
