@@ -81,7 +81,30 @@ deleteUser(email: string) {
   });
 }
 
-
+promoteToAdmin(id: number) {
+  this.adminService.promoteUser(id).subscribe({
+    next: (updatedUser) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Promoted',
+        text: `User ${updatedUser.email} has been promoted to ADMIN`,
+        timer: 2500,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        width: window.innerWidth < 600 ? '65%' : '300px',
+      });
+      this.fetchUsers(); 
+    },
+    error: () => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to promote user',
+        width: window.innerWidth < 600 ? '65%' : '300px',
+      });
+    }
+  });
+}
 
   changeRole(id: number, role: string) {
     this.adminService.changeUserRole(id, role).subscribe(() => {

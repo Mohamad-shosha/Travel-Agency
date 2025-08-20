@@ -58,4 +58,11 @@ deleteUser(email: string): Observable<string> {
     { headers: this.getAuthHeaders() });
 }
 
+promoteUser(id: number): Observable<any> {
+  return this.http.put<any>(`${this.baseUrl}/promote/${id}`, null, {
+    headers: this.getAuthHeaders()
+  });
+}
+
+
 }
