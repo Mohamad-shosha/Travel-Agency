@@ -18,5 +18,7 @@ public interface UserService {
 
     public UserDTO promoteUserToAdmin(Long id);
 
+    public UserDTO demoteAdminToUser(Long id);
+
     public String deleteUserByEmail(String email);
 }

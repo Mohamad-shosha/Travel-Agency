@@ -60,6 +60,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDTO demoteAdminToUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        user.setRole(Role.USER);
+        userRepository.save(user);
+        return userMapper.toUserDTO(user);
+    }
+
+    @Override
     public String deleteUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
