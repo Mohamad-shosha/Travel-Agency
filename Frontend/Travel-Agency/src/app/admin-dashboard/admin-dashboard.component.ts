@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from './admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -11,7 +12,6 @@ export class AdminDashboardComponent implements OnInit {
   reservations: any[] = [];
   cancelledReservations: any[] = [];
 
-  // المتغيرات الخاصة بعملية الإلغاء مع السبب
   cancellationReasons: string[] = [
     'PERSONAL_ISSUE',
     'ILLNESS',
@@ -43,11 +43,45 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  deleteUser(id: number) {
-    this.adminService.deleteUser(id).subscribe(() => {
-      this.fetchUsers();
-    });
-  }
+deleteUser(email: string) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: `You are about to delete the user: ${email}`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete',
+    cancelButtonText: 'Cancel',
+    reverseButtons: true,
+    width: window.innerWidth < 600 ? '70%' : '350px',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.adminService.deleteUser(email).subscribe({
+        next: (message: string) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Deleted',
+            text: message || 'User has been deleted successfully',
+            timer: 2500,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            width: window.innerWidth < 600 ? '65%' : '300px',
+          });
+          this.fetchUsers();
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err?.error || 'Failed to delete the user',
+            width: window.innerWidth < 600 ? '65%' : '300px',
+          });
+        }
+      });
+    }
+  });
+}
+
+
 
   changeRole(id: number, role: string) {
     this.adminService.changeUserRole(id, role).subscribe(() => {
@@ -67,39 +101,61 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  // فتح مودال سبب الإلغاء مع تخزين id الحجز المختار
   openCancelModal(reservationId: number) {
     this.selectedReservationId = reservationId;
     this.selectedReason = '';
     this.customReason = '';
   }
 
-  // إرسال سبب الإلغاء وتأكيد الإلغاء
   confirmCancellation() {
     if (!this.selectedReservationId) {
-      alert('No reservation selected');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Error',
+        text: 'No reservation selected',
+        width: window.innerWidth < 600 ? '65%' : '300px',
+      });
       return;
     }
 
     const reasonToSend = this.selectedReason === 'OTHER' ? this.customReason.trim() : this.selectedReason;
 
     if (!reasonToSend) {
-      alert('Please select or enter a cancellation reason');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Alert',
+        text: 'Please select or enter a cancellation reason',
+        width: window.innerWidth < 600 ? '65%' : '300px',
+      });
       return;
     }
 
-    this.adminService.cancelReservation(this.selectedReservationId, reasonToSend).subscribe(() => {
-      alert('Reservation cancelled successfully');
-      this.selectedReservationId = null;
-      this.fetchReservations();
-      this.fetchCancelledReservations();
-    }, error => {
-      alert('Failed to cancel reservation');
-      console.error(error);
+    this.adminService.cancelReservation(this.selectedReservationId, reasonToSend).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Cancelled',
+          text: 'Reservation cancelled successfully',
+          timer: 2500,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          width: window.innerWidth < 600 ? '65%' : '300px',
+        });
+        this.selectedReservationId = null;
+        this.fetchReservations();
+        this.fetchCancelledReservations();
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to cancel reservation',
+          width: window.innerWidth < 600 ? '65%' : '300px',
+        });
+      }
     });
   }
 
-  // إغلاق مودال سبب الإلغاء
   closeCancelModal() {
     this.selectedReservationId = null;
   }

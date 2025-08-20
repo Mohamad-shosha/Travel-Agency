@@ -25,11 +25,14 @@ export class AdminService {
     });
   }
 
-  deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/users/${id}`, {
-      headers: this.getAuthHeaders()
-    });
-  }
+deleteUser(email: string): Observable<string> {
+  return this.http.request<string>('delete', `${this.baseUrl}/delete`, {
+    body: { email },
+    headers: this.getAuthHeaders(),
+    responseType: 'text' as 'json' 
+  });
+}
+
 
   changeUserRole(id: number, role: string): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/users/${id}/role?role=${role}`, null, {
