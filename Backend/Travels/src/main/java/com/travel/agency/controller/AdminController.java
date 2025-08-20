@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -54,7 +55,14 @@ public class AdminController {
     }
 
     @PutMapping("/promote/{id}")
-    public UserDTO promoteUserToAdmin(@PathVariable long id){
+    public UserDTO promoteUserToAdmin(@PathVariable long id) {
         return userService.promoteUserToAdmin(id);
     }
+
+    @DeleteMapping("/delete")
+    public String deleteUserByEmail(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        return userService.deleteUserByEmail(email);
+    }
+
 }

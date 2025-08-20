@@ -59,4 +59,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUserDTO(user);
     }
 
+    @Override
+    public String deleteUserByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+        userRepository.delete(user);
+        return "User deleted successfully";
+    }
+
 }
